@@ -172,7 +172,7 @@ p {
   align-items: center;
   position: relative;
   color: white;
-  background: var(--color-primary);
+  background-color: var(--color-primary); /* Use brand navy blue as fallback */
   overflow: hidden;
 }
 

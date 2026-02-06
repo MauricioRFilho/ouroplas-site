@@ -68,7 +68,7 @@ export default function Home() {
                   alt="Logo Ouroplas" 
                   width={40}
                   height={40}
-                  className="object-cover"
+                  className="object-contain" /* Changed to contain to avoid stretching/clipping */
                 />
               </div>
               <span className="logo-text">OUROPLAS</span>
@@ -119,7 +119,6 @@ export default function Home() {
           loop 
           playsInline 
           className="hero-video"
-          poster="/ouroplas-logo.jpg"
           aria-hidden="true"
         >
           <source src="/hero-optimized.mp4" type="video/mp4" />
