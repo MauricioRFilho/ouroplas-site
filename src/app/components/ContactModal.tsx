@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { supabase } from "@/lib/supabaseClient";
 
 interface ContactModalProps {
@@ -16,6 +16,16 @@ export default function ContactModal({ isOpen, onClose, whatsappNumber }: Contac
     message: ""
   });
   const [loading, setLoading] = useState(false);
+
+  // Lock scroll when modal is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => { document.body.style.overflow = 'unset'; };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
@@ -39,8 +49,6 @@ export default function ContactModal({ isOpen, onClose, whatsappNumber }: Contac
 
         if (error) {
             console.error('Error saving lead:', error);
-            // We continue to WhatsApp even if persistence fails, 
-            // so we don't block the user.
         }
 
         // 2. Redirect to WhatsApp
@@ -50,7 +58,7 @@ export default function ContactModal({ isOpen, onClose, whatsappNumber }: Contac
         const cleanNumber = whatsappNumber.replace(/\D/g, '');
         const whatsappLink = `https://wa.me/${cleanNumber}?text=${encodedText}`;
         
-        window.open(whatsappLink, '_blank');
+        window.open(whatsappLink, '_blank', 'noopener,noreferrer');
         
         // 3. Clear and close
         setFormData({ name: "", company: "", phone: "", message: "" });
@@ -58,30 +66,44 @@ export default function ContactModal({ isOpen, onClose, whatsappNumber }: Contac
 
     } catch (err) {
         console.error("Unexpected error:", err);
-        alert("Ocorreu um erro. Tente novamente ou nos chame direto no WhatsApp.");
+        alert("Ocorreu um erro ao processar seu contato. Por favor, tente novamente.");
     } finally {
         setLoading(false);
     }
   };
 
   return (
-    <div className="modal-overlay" onClick={(e) => {
+    <div 
+      className="modal-overlay" 
+      role="dialog" 
+      aria-modal="true" 
+      aria-labelledby="modal-title"
+      onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
-    }}>
+      }}
+    >
       <div className="modal-content">
-        <button className="modal-close" onClick={onClose}>&times;</button>
+        <button 
+          className="modal-close" 
+          onClick={onClose} 
+          aria-label="Fechar formulário"
+        >
+          &times;
+        </button>
         
         <div className="modal-header">
-          <h3>Falar com Especialista</h3>
-          <p>Preencha para iniciarmos seu atendimento personalizado.</p>
+          <h3 id="modal-title">Falar com Especialista</h3>
+          <p>Oferecemos atendimento técnico direto para sua indústria.</p>
         </div>
 
         <form onSubmit={handleSubmit} className="contact-form">
           <div className="form-group">
-            <label htmlFor="name">Nome Completo</label>
+            <label htmlFor="name">Nome Completo <span className="text-secondary">*</span></label>
             <input
               type="text"
               id="name"
+              name="name"
+              autoComplete="name"
               required
               placeholder="Ex: João Silva"
               value={formData.name}
@@ -90,43 +112,52 @@ export default function ContactModal({ isOpen, onClose, whatsappNumber }: Contac
           </div>
 
           <div className="form-group">
-            <label htmlFor="company">Empresa</label>
+            <label htmlFor="company">Empresa <span className="text-secondary">*</span></label>
             <input
               type="text"
               id="company"
+              name="organization"
+              autoComplete="organization"
               required
-              placeholder="Ex: Ouroplas Indústria"
+              placeholder="Ex: Nome da sua Indústria"
               value={formData.company}
               onChange={(e) => setFormData({...formData, company: e.target.value})}
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="phone">Telefone / WhatsApp</label>
+            <label htmlFor="phone">WhatsApp <span className="text-secondary">*</span></label>
             <input
               type="tel"
               id="phone"
+              name="tel"
+              autoComplete="tel"
               required
-              placeholder="(11) 99999-9999"
+              placeholder="(00) 00000-0000"
               value={formData.phone}
               onChange={(e) => setFormData({...formData, phone: e.target.value})}
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="message">Como podemos ajudar?</label>
+            <label htmlFor="message">Assunto / Necessidade</label>
             <textarea
               id="message"
+              name="message"
               rows={3}
-              placeholder="Gostaria de um orçamento para..."
+              placeholder="Breve descrição do seu projeto ou peça..."
               value={formData.message}
               onChange={(e) => setFormData({...formData, message: e.target.value})}
             />
           </div>
 
           <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
-            {loading ? "Iniciando..." : "Iniciar Conversa no WhatsApp"}
+            {loading ? "Processando..." : "SOLICITAR ATENDIMENTO"}
           </button>
+          
+          <p className="text-center mt-4" style={{ fontSize: '0.75rem', opacity: 0.6 }}>
+            Seus dados estão protegidos conforme nossa LGPD.
+          </p>
         </form>
       </div>
     </div>

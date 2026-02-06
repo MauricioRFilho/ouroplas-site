@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import ContactModal from "./components/ContactModal";
 import WhatsAppFloat from "./components/WhatsAppFloat";
 import InstagramFeed from "./components/InstagramFeed";
@@ -9,24 +10,24 @@ import { supabase } from "@/lib/supabaseClient";
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isMenuActive, setIsMenuActive] = useState(false);
   const [config, setConfig] = useState<any>({
     hero_title: "Injeção de Plásticos com Precisão e Qualidade",
     whatsapp_number: "5541998202737",
     contact_email: "contato@ouroplas.com.br",
     about_title: "Soluções em Plásticos desde 2010",
-    about_text: "A Ouroplas é referência em injeção de plásticos técnicos, unindo tecnologia de ponta e compromisso com o cliente."
+    about_text: "A Ouroplas é referência em injeção de plásticos técnicos, unindo tecnologia de ponta e compromisso com o cliente.",
+    instagram_username: "@ouroplas"
   });
   const [services, setServices] = useState<any[]>([]);
 
   useEffect(() => {
     async function loadData() {
-      // Load Config
       const data = await getSiteConfig();
       if (Object.keys(data).length > 0) {
         setConfig((prev: any) => ({ ...prev, ...data }));
       }
 
-      // Load Services
       const { data: servicesData } = await supabase
         .from("services")
         .select("*")
@@ -35,87 +36,125 @@ export default function Home() {
       if (servicesData && servicesData.length > 0) {
         setServices(servicesData);
       } else {
-        // Fallback
         setServices([
-          { title: "Injeção Técnica", description: "Produção de peças complexas com maquinário de alta precisão." },
-          { title: "Desenvolvimento de Moldes", description: "Parceria no desenvolvimento e manutenção de moldes." },
-          { title: "Montagem e Acabamento", description: "Serviços complementares para o produto final." }
+          { title: "Injeção Técnica", description: "Produção de peças complexas com maquinário de alta precisão e tecnologia de ponta." },
+          { title: "Desenvolvimento de Moldes", description: "Soluções completas no projeto, fabricação e manutenção de moldes industriais." },
+          { title: "Montagem e Acabamento", description: "Processos integrados de montagem e acabamento para entregar seu produto finalizado." }
         ]);
       }
     }
     loadData();
   }, []);
 
+  const closeMenu = () => setIsMenuActive(false);
+
   return (
     <main>
-      <ContactModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-        whatsappNumber={config.whatsapp_number}
-      />
-      <WhatsAppFloat onClick={() => setIsModalOpen(true)} />
-      
-      {/* Navigation */}
-      <nav className="nav">
-        <div className="container nav-container">
-          <div className="logo">
-             <div className="relative h-12 w-auto aspect-square overflow-hidden rounded-full">
-                <img 
+      <header>
+        <ContactModal 
+          isOpen={isModalOpen} 
+          onClose={() => setIsModalOpen(false)} 
+          whatsappNumber={config.whatsapp_number}
+        />
+        <WhatsAppFloat onClick={() => setIsModalOpen(true)} />
+        
+        {/* Navigation */}
+        <nav className="nav" aria-label="Navegação principal">
+          <div className="container nav-container">
+            <a href="#home" className="logo" aria-label="Ouroplas Home">
+              <div className="relative h-10 w-10 overflow-hidden rounded-lg">
+                <Image 
                   src="/ouroplas-logo.jpg" 
-                  alt="Ouroplas Logo" 
-                  style={{ height: '50px', width: 'auto' }}
+                  alt="Logo Ouroplas" 
+                  width={40}
+                  height={40}
+                  className="object-cover"
                 />
-             </div>
-            <span className="logo-text">OUROPLAS</span>
+              </div>
+              <span className="logo-text">OUROPLAS</span>
+            </a>
+
+            {/* Mobile Toggle */}
+            <button 
+              className={`menu-toggle ${isMenuActive ? 'active' : ''}`} 
+              onClick={() => setIsMenuActive(!isMenuActive)}
+              aria-expanded={isMenuActive}
+              aria-label="Abrir menu de navegação"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+
+            <div className={`nav-links ${isMenuActive ? 'active' : ''}`}>
+              <a href="#home" onClick={closeMenu}>Início</a>
+              <a href="#sobre" onClick={closeMenu}>Sobre</a>
+              <a href="#servicos" onClick={closeMenu}>Serviços</a>
+              <a href="#contato" onClick={closeMenu}>Contato</a>
+              {/* Optional: mobile version of the CTA button inside the menu */}
+              <button 
+                className="btn btn-primary nav-links-btn" 
+                style={{ display: isMenuActive ? 'block' : 'none', marginTop: '20px' }}
+                onClick={() => { setIsModalOpen(true); closeMenu(); }}
+              >
+                Orçamento Rápido
+              </button>
+            </div>
+
+            <button 
+              className="btn btn-primary nav-cta" 
+              onClick={() => setIsModalOpen(true)}
+            >
+              Falar com Especialista
+            </button>
           </div>
-          <div className="nav-links">
-            <a href="#home">Início</a>
-            <a href="#sobre">Sobre</a>
-            <a href="#servicos">Serviços</a>
-            <a href="#contato">Contato</a>
-          </div>
-          <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}>Falar com Especialista</button>
-        </div>
-      </nav>
+        </nav>
+      </header>
 
       {/* Hero Section */}
-      <section id="home" className="hero video-hero">
-        <div className="video-overlay"></div>
+      <section id="home" className="hero">
         <video 
           autoPlay 
           muted 
           loop 
           playsInline 
           className="hero-video"
-          poster="/ouroplas-logo.jpg" /* Add a poster while it loads */
+          poster="/ouroplas-logo.jpg"
+          aria-hidden="true"
         >
           <source src="/hero-optimized.mp4" type="video/mp4" />
           <source src="/hero-background.mov" type="video/quicktime" />
-          Seu navegador não suporta vídeos.
         </video>
+        <div className="video-overlay"></div>
 
-        <div className="container hero-content relative z-10">
+        <div className="container hero-content">
           <h1 dangerouslySetInnerHTML={{ __html: config.hero_title.replace('Precisão', '<span class="text-secondary">Precisão</span>') }}></h1>
-          <p>Transformamos sua ideia em produto. Especialistas em fabricação de peças técnicas para a indústria.</p>
+          <p>Potencialize sua indústria com peças plásticas de alta performance. Atendimento especializado em injeção técnica para projetos complexos.</p>
           <div className="hero-buttons">
             <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}>Solicitar Orçamento</button>
-            <button className="btn btn-outline">Conheça Nossa Fábrica</button>
+            <a href="#sobre" className="btn btn-outline">Nossa Fábrica</a>
           </div>
         </div>
       </section>
 
       {/* About Section */}
       <section id="sobre" className="section">
-        <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '60px', alignItems: 'center' }}>
+        <div className="container about-grid">
           <div>
-            <h2 className="mb-4">{config.about_title}</h2>
-            <p className="text-muted" style={{ fontSize: '1.1rem' }}>{config.about_text}</p>
-            <div className="mt-8">
-              <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}>Nossa História</button>
+            <span className="text-secondary font-bold uppercase tracking-wider text-sm">Qualidade Industrial</span>
+            <h2 className="mb-6 mt-2">{config.about_title}</h2>
+            <p className="text-muted mb-8 leading-relaxed">{config.about_text}</p>
+            <div className="flex gap-4">
+              <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}>Falar com Comercial</button>
             </div>
           </div>
-          <div className="relative aspect-video rounded-xl overflow-hidden shadow-2xl">
-             <img src="/ouroplas-logo.jpg" alt="Fábrica Ouroplas" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+          <div className="relative aspect-square md:aspect-video rounded-3xl overflow-hidden shadow-2xl">
+             <Image 
+               src="/ouroplas-logo.jpg" 
+               alt="Processo de injeção plástica Ouroplas" 
+               fill
+               className="object-cover grayscale hover:grayscale-0 transition-all duration-700" 
+             />
           </div>
         </div>
       </section>
@@ -124,15 +163,15 @@ export default function Home() {
       <section id="servicos" className="section bg-light">
         <div className="container">
           <div className="section-header">
-            <h2>Nossas Soluções</h2>
-            <p>Do design à entrega final, cuidamos de todo o processo.</p>
+            <h2 className="mb-4">Nossas Soluções industriais</h2>
+            <p>Infraestrutura completa para atender demandas de alta complexidade com rigor documental e técnico.</p>
           </div>
           <div className="services-grid">
             {services.map((service, index) => (
-              <div className="card" key={service.id || index}>
-                <h3>{service.title}</h3>
+              <article className="card" key={service.id || index}>
+                <h3 className="mb-3">{service.title}</h3>
                 <p>{service.description}</p>
-              </div>
+              </article>
             ))}
           </div>
         </div>
@@ -147,9 +186,9 @@ export default function Home() {
       {/* CTA Section */}
       <section id="contato" className="section cta-section">
         <div className="container">
-          <h2>Pronto para escalar sua produção?</h2>
-          <p>Entre em contato com nossa equipe comercial e descubra como podemos ajudar.</p>
-          <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}>Iniciar Conversa no WhatsApp</button>
+          <h2 className="text-white mb-4">Pronto para elevar sua produção?</h2>
+          <p className="text-white opacity-90 mb-8 max-w-2xl mx-auto">Nossa equipe está pronta para analisar seu projeto e oferecer a melhor solução em injeção plástica.</p>
+          <button className="btn btn-primary btn-lg" onClick={() => setIsModalOpen(true)}>Falar no WhatsApp agora</button>
         </div>
       </section>
 
@@ -157,27 +196,32 @@ export default function Home() {
       <footer className="footer">
         <div className="container footer-content">
           <div className="footer-brand">
-            <h3>OUROPLAS</h3>
-            <p>Indústria e Comércio de Plásticos</p>
+            <h3 className="mb-4">OUROPLAS</h3>
+            <p className="max-w-xs">Indústria e Comércio de Plásticos focada em excelência técnica e parcerias de longo prazo.</p>
           </div>
           <div className="footer-links">
-            <h4>Links Rápidos</h4>
-            <a href="#home">Início</a>
-            <a href="#sobre">Sobre Nós</a>
-            <a href="#privacidade">Política de Privacidade</a>
+            <h4>Institucional</h4>
+            <nav className="flex flex-col">
+              <a href="#home">Início</a>
+              <a href="#sobre">Sobre Nós</a>
+              <a href="#servicos">Nossas Soluções</a>
+            </nav>
           </div>
           <div className="footer-contact">
-            <h4>Contato</h4>
+            <h4>Contato Direto</h4>
             <p>{config.contact_email}</p>
-            <p>{config.whatsapp_number.replace(/^(\d{2})(\d{2})(\d{5})(\d{4})$/, '+$1 ($2) $3-$4')}</p>
+            <p className="font-bold text-white text-lg">
+              {config.whatsapp_number.replace(/^(\d{2})(\d{2})(\d{5})(\d{4})$/, '+$1 ($2) $3-$4')}
+            </p>
+            <p className="text-sm opacity-50 mt-4">Curitiba - Paraná</p>
           </div>
         </div>
         <div className="footer-bottom">
-          <p>&copy; {new Date().getFullYear()} Ouroplas Indústria e Comércio de Plásticos. Todos os direitos reservados.</p>
+          <div className="container">
+            <p>&copy; {new Date().getFullYear()} Ouroplas Indústria e Comércio de Plásticos Ltda. CNPJ: 00.000.000/0001-00</p>
+          </div>
         </div>
       </footer>
     </main>
   );
 }
-
-
