@@ -87,9 +87,10 @@ export default function Home() {
           loop 
           playsInline 
           className="hero-video"
+          poster="/ouroplas-logo.jpg" /* Add a poster while it loads */
         >
+          <source src="/hero-optimized.mp4" type="video/mp4" />
           <source src="/hero-background.mov" type="video/quicktime" />
-          <source src="/hero-background.mov" type="video/mp4" />
           Seu navegador não suporta vídeos.
         </video>
 
