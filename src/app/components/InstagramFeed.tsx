@@ -5,12 +5,17 @@ import Image from "next/image";
   Images should be placed in public/instagram/ as post1.jpg, post2.jpg, etc.
 */
 
-export default function InstagramFeed() {
+interface InstagramFeedProps {
+  username?: string;
+  url?: string;
+}
+
+export default function InstagramFeed({ username = "@ouroplas", url = "https://instagram.com/ouroplas" }: InstagramFeedProps) {
   const posts = [
-    { id: 1, image: '/instagram/post1.jpg', link: 'https://instagram.com/ouroplas', likes: 124 },
-    { id: 2, image: '/instagram/post2.jpg', link: 'https://instagram.com/ouroplas', likes: 89 },
-    { id: 3, image: '/instagram/post3.jpg', link: 'https://instagram.com/ouroplas', likes: 256 },
-    { id: 4, image: '/instagram/post4.jpg', link: 'https://instagram.com/ouroplas', likes: 142 },
+    { id: 1, image: '/instagram/post1.jpg', link: url, likes: 124 },
+    { id: 2, image: '/instagram/post2.jpg', link: url, likes: 89 },
+    { id: 3, image: '/instagram/post3.jpg', link: url, likes: 256 },
+    { id: 4, image: '/instagram/post4.jpg', link: url, likes: 142 },
   ];
 
   return (
@@ -33,23 +38,19 @@ export default function InstagramFeed() {
             </svg>
             <h2 className="text-3xl font-bold text-gray-800">Siga a Ouroplas</h2>
           </div>
-          <p>Acompanhe nosso dia a dia e novidades da fábrica no Instagram @ouroplas</p>
+          <p>Acompanhe nosso dia a dia e novidades da fábrica no Instagram {username}</p>
         </div>
 
         <div className="instagram-grid">
             {posts.map((post) => (
                 <a href={post.link} target="_blank" key={post.id} className="insta-card group">
-                   {/* We use a colored placeholder div if image fails or for loading, but Image component handles it naturally */}
                    <div className="relative w-full h-full bg-gray-200">
-                      {/* Warning: In dev, if these images don't exist, it will show alt text or broken icon. 
-                          The user needs to upload images to /public/instagram/ 
-                      */}
                       <Image 
                         src={post.image} 
                         alt={`Instagram post ${post.id}`}
                         fill
                         className="object-cover transition-transform duration-300 group-hover:scale-110"
-                        unoptimized // Optional: if using local files without optimization server setup sometimes is easier, but standard is fine
+                        unoptimized
                       />
                       <div className="insta-overlay">
                           <span>❤️ {post.likes}</span>
@@ -60,7 +61,7 @@ export default function InstagramFeed() {
         </div>
         
         <div className="text-center mt-8">
-            <a href="https://instagram.com/ouroplas" target="_blank" className="btn btn-outline" style={{borderColor: '#E1306C', color: '#E1306C'}}>
+            <a href={url} target="_blank" className="btn btn-outline" style={{borderColor: '#E1306C', color: '#E1306C'}}>
                 Ver Perfil Completo
             </a>
         </div>
@@ -69,3 +70,4 @@ export default function InstagramFeed() {
     </section>
   );
 }
+

@@ -1,25 +1,65 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ContactModal from "./components/ContactModal";
 import WhatsAppFloat from "./components/WhatsAppFloat";
 import InstagramFeed from "./components/InstagramFeed";
+import { getSiteConfig } from "@/lib/siteConfig";
+import { supabase } from "@/lib/supabaseClient";
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [config, setConfig] = useState<any>({
+    hero_title: "Injeção de Plásticos com Precisão e Qualidade",
+    whatsapp_number: "5541998202737",
+    contact_email: "contato@ouroplas.com.br",
+    about_title: "Soluções em Plásticos desde 2010",
+    about_text: "A Ouroplas é referência em injeção de plásticos técnicos, unindo tecnologia de ponta e compromisso com o cliente."
+  });
+  const [services, setServices] = useState<any[]>([]);
+
+  useEffect(() => {
+    async function loadData() {
+      // Load Config
+      const data = await getSiteConfig();
+      if (Object.keys(data).length > 0) {
+        setConfig((prev: any) => ({ ...prev, ...data }));
+      }
+
+      // Load Services
+      const { data: servicesData } = await supabase
+        .from("services")
+        .select("*")
+        .order("order_index");
+      
+      if (servicesData && servicesData.length > 0) {
+        setServices(servicesData);
+      } else {
+        // Fallback
+        setServices([
+          { title: "Injeção Técnica", description: "Produção de peças complexas com maquinário de alta precisão." },
+          { title: "Desenvolvimento de Moldes", description: "Parceria no desenvolvimento e manutenção de moldes." },
+          { title: "Montagem e Acabamento", description: "Serviços complementares para o produto final." }
+        ]);
+      }
+    }
+    loadData();
+  }, []);
 
   return (
     <main>
-      <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      <ContactModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        whatsappNumber={config.whatsapp_number}
+      />
       <WhatsAppFloat onClick={() => setIsModalOpen(true)} />
       
       {/* Navigation */}
       <nav className="nav">
         <div className="container nav-container">
           <div className="logo">
-             {/* Logo updated to image */}
              <div className="relative h-12 w-auto aspect-square overflow-hidden rounded-full">
-                {/* Optimized Next.js Image */}
                 <img 
                   src="/ouroplas-logo.jpg" 
                   alt="Ouroplas Logo" 
@@ -54,11 +94,27 @@ export default function Home() {
         </video>
 
         <div className="container hero-content relative z-10">
-          <h1>Injeção de Plásticos com <span className="text-secondary">Precisão</span> e Qualidade</h1>
+          <h1 dangerouslySetInnerHTML={{ __html: config.hero_title.replace('Precisão', '<span class="text-secondary">Precisão</span>') }}></h1>
           <p>Transformamos sua ideia em produto. Especialistas em fabricação de peças técnicas para a indústria.</p>
           <div className="hero-buttons">
             <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}>Solicitar Orçamento</button>
             <button className="btn btn-outline">Conheça Nossa Fábrica</button>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section id="sobre" className="section">
+        <div className="container" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '60px', alignItems: 'center' }}>
+          <div>
+            <h2 className="mb-4">{config.about_title}</h2>
+            <p className="text-muted" style={{ fontSize: '1.1rem' }}>{config.about_text}</p>
+            <div className="mt-8">
+              <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}>Nossa História</button>
+            </div>
+          </div>
+          <div className="relative aspect-video rounded-xl overflow-hidden shadow-2xl">
+             <img src="/ouroplas-logo.jpg" alt="Fábrica Ouroplas" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
           </div>
         </div>
       </section>
@@ -71,27 +127,24 @@ export default function Home() {
             <p>Do design à entrega final, cuidamos de todo o processo.</p>
           </div>
           <div className="services-grid">
-            <div className="card">
-              <h3>Injeção Técnica</h3>
-              <p>Produção de peças complexas com maquinário de alta precisão e materiais de engenharia.</p>
-            </div>
-            <div className="card">
-              <h3>Desenvolvimento de Moldes</h3>
-              <p>Parceria no desenvolvimento e manutenção de moldes para garantir a vida útil do seu projeto.</p>
-            </div>
-            <div className="card">
-              <h3>Montagem e Acabamento</h3>
-              <p>Serviços complementares para entregar o produto pronto para sua linha de montagem ou venda.</p>
-            </div>
+            {services.map((service, index) => (
+              <div className="card" key={service.id || index}>
+                <h3>{service.title}</h3>
+                <p>{service.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Instagram Feed Section */}
-      <InstagramFeed />
+      <InstagramFeed 
+        username={config.instagram_username} 
+        url={config.instagram_url} 
+      />
 
       {/* CTA Section */}
-      <section className="section cta-section">
+      <section id="contato" className="section cta-section">
         <div className="container">
           <h2>Pronto para escalar sua produção?</h2>
           <p>Entre em contato com nossa equipe comercial e descubra como podemos ajudar.</p>
@@ -114,8 +167,8 @@ export default function Home() {
           </div>
           <div className="footer-contact">
             <h4>Contato</h4>
-            <p>contato@ouroplas.com.br</p>
-            <p>(41) 99820-2737</p>
+            <p>{config.contact_email}</p>
+            <p>{config.whatsapp_number.replace(/^(\d{2})(\d{2})(\d{5})(\d{4})$/, '+$1 ($2) $3-$4')}</p>
           </div>
         </div>
         <div className="footer-bottom">
@@ -125,3 +178,5 @@ export default function Home() {
     </main>
   );
 }
+
+

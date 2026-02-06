@@ -5,9 +5,10 @@ import { supabase } from "@/lib/supabaseClient";
 interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
+  whatsappNumber: string;
 }
 
-export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
+export default function ContactModal({ isOpen, onClose, whatsappNumber }: ContactModalProps) {
   const [formData, setFormData] = useState({
     name: "",
     company: "",
@@ -46,10 +47,8 @@ export default function ContactModal({ isOpen, onClose }: ContactModalProps) {
         const text = `Olá, me chamo ${formData.name} da empresa ${formData.company}. ${formData.message}`;
         const encodedText = encodeURIComponent(text);
         
-        // TODO: In the future, fetch this number from 'site_config' table
-        // Contact: Eleandro
-        const whatsappNumber = "5541998202737"; 
-        const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodedText}`;
+        const cleanNumber = whatsappNumber.replace(/\D/g, '');
+        const whatsappLink = `https://wa.me/${cleanNumber}?text=${encodedText}`;
         
         window.open(whatsappLink, '_blank');
         
