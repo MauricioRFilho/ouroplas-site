@@ -92,8 +92,8 @@ export default function ContactModal({ isOpen, onClose, whatsappNumber }: Contac
         </button>
         
         <div className="modal-header">
-          <h3 id="modal-title">Falar com Especialista</h3>
-          <p>Oferecemos atendimento técnico direto para sua indústria.</p>
+          <h3 id="modal-title">Atendimento Técnico</h3>
+          <p>Fale diretamente com nossa engenharia para orçamentos de moldes e injeção.</p>
         </div>
 
         <form onSubmit={handleSubmit} className="contact-form">
@@ -105,21 +105,21 @@ export default function ContactModal({ isOpen, onClose, whatsappNumber }: Contac
               name="name"
               autoComplete="name"
               required
-              placeholder="Ex: João Silva"
+              placeholder="Ex: Responsável Técnico / Compras"
               value={formData.name}
               onChange={(e) => setFormData({...formData, name: e.target.value})}
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="company">Empresa <span className="text-secondary">*</span></label>
+            <label htmlFor="company">Indústria / Empresa <span className="text-secondary">*</span></label>
             <input
               type="text"
               id="company"
               name="organization"
               autoComplete="organization"
               required
-              placeholder="Ex: Nome da sua Indústria"
+              placeholder="Sua Indústria"
               value={formData.company}
               onChange={(e) => setFormData({...formData, company: e.target.value})}
             />

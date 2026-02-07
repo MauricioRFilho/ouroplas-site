@@ -12,11 +12,11 @@ export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMenuActive, setIsMenuActive] = useState(false);
   const [config, setConfig] = useState<any>({
-    hero_title: "Injeção de Plásticos com Precisão e Qualidade",
+    hero_title: "Escalamos seu Projeto com Injeção de Precisão",
     whatsapp_number: "5541998202737",
     contact_email: "contato@ouroplas.com.br",
-    about_title: "Soluções em Plásticos desde 2010",
-    about_text: "A Ouroplas é referência em injeção de plásticos técnicos, unindo tecnologia de ponta e compromisso com o cliente.",
+    about_title: "Do Molde à Peça: Solução Completa em Plásticos",
+    about_text: "Localizada em Curitiba, a Ouroplas é especialista em transformar projetos técnicos em produção real. Unimos o desenvolvimento de moldes sob medida com processos de injeção de alta performance para entregar peças com rigor industrial.",
     instagram_username: "@ouroplas"
   });
   const [services, setServices] = useState<any[]>([]);
@@ -37,9 +37,9 @@ export default function Home() {
         setServices(servicesData);
       } else {
         setServices([
-          { title: "Injeção Técnica", description: "Produção de peças complexas com maquinário de alta precisão e tecnologia de ponta." },
-          { title: "Desenvolvimento de Moldes", description: "Soluções completas no projeto, fabricação e manutenção de moldes industriais." },
-          { title: "Montagem e Acabamento", description: "Processos integrados de montagem e acabamento para entregar seu produto finalizado." }
+          { title: "Desenvolvimento de Moldes", description: "Engenharia dedicada para criar moldes industriais sob medida, focados em durabilidade e precisão técnica." },
+          { title: "Injeção de Alta Performance", description: "Infraestrutura com máquinas Tederic de última geração para injeção de peças técnicas em larga escala." },
+          { title: "Logística e Distribuição", description: "Localização estratégica em Curitiba para atender indústrias em todo o Brasil com agilidade e compromisso." }
         ]);
       }
     }
@@ -128,7 +128,7 @@ export default function Home() {
 
         <div className="container hero-content">
           <h1 dangerouslySetInnerHTML={{ __html: config.hero_title.replace('Precisão', '<span class="text-secondary">Precisão</span>') }}></h1>
-          <p>Potencialize sua indústria com peças plásticas de alta performance. Atendimento especializado em injeção técnica para projetos complexos.</p>
+          <p>Seu projeto nasce no papel e ganha escala industrial na Ouroplas. Atendimento técnico especializado em moldes e injeção técnica para grandes demandas.</p>
           <div className="hero-buttons">
             <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}>Solicitar Orçamento</button>
             <a href="#sobre" className="btn btn-outline">Nossa Fábrica</a>
@@ -140,20 +140,33 @@ export default function Home() {
       <section id="sobre" className="section">
         <div className="container about-grid">
           <div>
-            <span className="text-secondary font-bold uppercase tracking-wider text-sm">Qualidade Industrial</span>
+            <span className="text-secondary font-bold uppercase tracking-wider text-sm">📍 Curitiba | Atendimento Nacional</span>
             <h2 className="mb-6 mt-2">{config.about_title}</h2>
             <p className="text-muted mb-8 leading-relaxed">{config.about_text}</p>
             <div className="flex gap-4">
               <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}>Falar com Comercial</button>
             </div>
           </div>
-          <div className="relative aspect-square md:aspect-video rounded-3xl overflow-hidden shadow-2xl">
-             <Image 
-               src="/ouroplas-logo.jpg" 
-               alt="Processo de injeção plástica Ouroplas" 
-               fill
-               className="object-cover grayscale hover:grayscale-0 transition-all duration-700" 
-             />
+          <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl bg-secondary">
+            <video 
+              autoPlay 
+              muted 
+              loop 
+              playsInline 
+              className="absolute inset-0 w-full h-full object-cover opacity-50"
+            >
+              <source src="/hero-optimized.mp4" type="video/mp4" />
+            </video>
+            <div className="absolute inset-0 flex items-center justify-center p-8">
+               <div className="relative w-24 h-24 sm:w-32 sm:h-32">
+                 <Image 
+                   src="/ouroplas-logo.jpg" 
+                   alt="Ouroplas Factory" 
+                   fill
+                   className="object-contain rounded-xl"
+                 />
+               </div>
+            </div>
           </div>
         </div>
       </section>
@@ -207,12 +220,13 @@ export default function Home() {
             </nav>
           </div>
           <div className="footer-contact">
-            <h4>Contato Direto</h4>
+            <h4>📍 Unidade Curitiba</h4>
+            <p>Rua Exemplo, 123 - Cidade Industrial</p>
             <p>{config.contact_email}</p>
             <p className="font-bold text-white text-lg">
               {config.whatsapp_number.replace(/^(\d{2})(\d{2})(\d{5})(\d{4})$/, '+$1 ($2) $3-$4')}
             </p>
-            <p className="text-sm opacity-50 mt-4">Curitiba - Paraná</p>
+            <p className="text-sm opacity-50 mt-4">Atendimento para todo o Brasil</p>
           </div>
         </div>
         <div className="footer-bottom">
