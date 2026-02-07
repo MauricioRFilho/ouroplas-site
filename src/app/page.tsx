@@ -5,7 +5,6 @@ import Image from "next/image";
 import ContactModal from "./components/ContactModal";
 import WhatsAppFloat from "./components/WhatsAppFloat";
 import InstagramFeed from "./components/InstagramFeed";
-import { getSiteConfig } from "@/lib/siteConfig";
 import { supabase } from "@/lib/supabaseClient";
 
 export default function Home() {
@@ -47,18 +46,18 @@ export default function Home() {
 
   return (
     <main>
-      <header className="header">
+      <header className="nav">
         <nav className="container nav-container">
-          <div className="logo-container">
-             <div className="relative w-10 h-10 mr-3">
-               <Image 
-                 src="/ouroplas-logo.jpg" 
-                 alt="Ouroplas Logo" 
-                 fill
-                 className="object-contain rounded-md"
-               />
-             </div>
-             <span className="font-bold text-xl tracking-tighter text-primary">OUROPLAS</span>
+          <div className="logo">
+             <Image 
+               src="/ouroplas-logo.jpg" 
+               alt="Ouroplas Logo" 
+               width={40}
+               height={40}
+               className="img-cover rounded-md"
+               priority
+             />
+             <span className="logo-text">OUROPLAS</span>
           </div>
 
           <button 
@@ -74,218 +73,227 @@ export default function Home() {
           <div className={`nav-links ${isMenuActive ? 'active' : ''}`}>
             <a href="#home" onClick={() => setIsMenuActive(false)}>Início</a>
             <a href="#sobre" onClick={() => setIsMenuActive(false)}>Fábrica</a>
-            <a href="#especialista" onClick={() => setIsMenuActive(false)}>Diferenciais</a>
+            <a href="#especialista" onClick={() => setIsMenuActive(false)}>Tecnologia</a>
             <a href="#contato" onClick={() => setIsMenuActive(false)}>Contato</a>
-            <div className="sm:hidden mt-8 w-full">
-              <button 
-                className="btn btn-primary w-full"
-                onClick={() => { setIsModalOpen(true); setIsMenuActive(false); }}
-              >
-                Falar com Especialista
-              </button>
-            </div>
           </div>
 
           <button 
-            className="btn btn-primary nav-cta hidden sm:block"
+            className="btn btn-primary nav-cta"
             onClick={() => setIsModalOpen(true)}
           >
-            Falar com Especialista
+            Atendimento Técnico
           </button>
         </nav>
       </header>
 
-      {/* Hero Section - Immersive Video */}
+      {/* Hero Section - Promoted High-Impact Content */}
       <section id="home" className="hero">
-        <video 
-          autoPlay 
-          muted 
-          loop 
-          playsInline 
-          className="hero-video gold-filter"
-          aria-hidden="true"
-        >
-          <source src="/hero-optimized.mp4" type="video/mp4" />
+        <video autoPlay muted loop playsInline className="hero-video gold-filter" aria-hidden="true">
+          <source src="/hero-new.mp4" type="video/mp4" />
         </video>
         <div className="video-overlay"></div>
-        <div className="container hero-content text-center sm:text-left">
-          <h1 
-            className="text-4xl sm:text-6xl lg:text-7xl font-bold mb-6"
-            dangerouslySetInnerHTML={{ __html: config.hero_title.replace('Precisão', '<span class="text-secondary">Precisão</span>') }}
-          ></h1>
-          <p className="max-w-2xl text-lg sm:text-xl mb-10 opacity-95 leading-relaxed">
-            Sua produção plástica com escala industrial, qualidade técnica e o rigor que seu projeto exige. Especialistas em moldagem técnica de alta precisão.
-          </p>
-          <div className="hero-buttons flex flex-wrap gap-4 justify-center sm:justify-start">
-            <button className="btn btn-primary btn-lg px-10" onClick={() => setIsModalOpen(true)}>Solicitar Orçamento</button>
-            <a href="#sobre" className="btn btn-outline btn-lg px-10">Ver Nossa Fábrica</a>
+        <div className="container">
+          <div className="hero-content text-left">
+            <h1 className="text-4xl sm:text-7xl font-bold mb-8 leading-tight text-white" 
+                dangerouslySetInnerHTML={{ __html: config.hero_title.replace('Precisão', '<span class="text-secondary">Precisão</span>') }}>
+            </h1>
+            <p className="max-w-2xl mb-12 text-white/90 text-lg sm:text-2xl italic font-light">
+              Suporte técnico especializado e garantia de entrega pronta para escalar seu projeto.
+            </p>
+            <div className="hero-buttons">
+              <button className="btn btn-primary btn-lg px-10" onClick={() => setIsModalOpen(true)}>Solicitar Orçamento</button>
+              <a href="#sobre" className="btn btn-outline btn-lg px-10">Ver Nossa Fábrica</a>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Section 1: Qualidade Técnica (GIF Highlights) */}
-      <section id="sobre" className="section bg-white overflow-hidden">
+      {/* Qualidade Técnica Section - Text on Left, GIF on Right */}
+      <section id="sobre" className="section bg-white">
         <div className="container">
-          <div className="about-grid">
-            <div className="relative group">
-              <div className="relative aspect-square rounded-[2rem] overflow-hidden shadow-2xl gold-filter border-4 border-light">
-                 <Image 
-                   src="/hero.gif" 
-                   alt="Processo de Injeção Plástica Ouroplas" 
-                   fill 
-                   className="object-cover" 
-                   unoptimized
-                 />
-              </div>
-              <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-secondary rounded-full flex items-center justify-center shadow-xl hidden lg:flex">
-                <span className="text-primary font-bold text-center text-xs p-2">QUALIDADE<br/>TESTADA</span>
-              </div>
-            </div>
-            <div className="pl-0 lg:pl-12">
-              <span className="text-secondary font-bold uppercase tracking-widest text-sm mb-4 block">📍 Ouroplas Indústria</span>
-              <h2 className="text-4xl sm:text-5xl font-bold text-primary mb-6 leading-tight">{config.about_title}</h2>
-              <p className="text-muted text-lg mb-8 leading-relaxed">
+          <div className="about-grid grid-60-40">
+            <div className="pr-large order-2 sm:order-1">
+              <span className="text-secondary font-bold uppercase tracking-wider text-sm mb-4 block">📍 Curitiba | Atendimento Nacional</span>
+              <h2 className="mb-6">{config.about_title}</h2>
+              <p className="mb-8 text-lg">
                 {config.about_text}
                 <br /><br />
-                <strong>Objetivamos construir parcerias sólidas e entregar resultados que superam expectativas técnicos industriais.</strong>
+                <strong>Parcerias sólidas e resultados consistentes em cada projeto industrial.</strong>
               </p>
-              <div className="grid grid-cols-2 gap-8">
-                <div>
-                  <h4 className="text-secondary font-bold text-3xl mb-1">24/7</h4>
-                  <p className="text-xs text-muted font-bold uppercase tracking-tighter">Produção Contínua</p>
+              <div className="flex gap-10">
+                <div className="border-l-4 border-secondary pl-6">
+                  <h4 className="text-secondary text-3xl font-black">24/7</h4>
+                  <p className="text-xs uppercase font-bold tracking-widest text-primary/50">Operação</p>
                 </div>
-                <div>
-                  <h4 className="text-secondary font-bold text-3xl mb-1">300T</h4>
-                  <p className="text-xs text-muted font-bold uppercase tracking-tighter">Capacidade Máxima</p>
+                <div className="border-l-4 border-secondary pl-6">
+                  <h4 className="text-secondary text-3xl font-black">300T</h4>
+                  <p className="text-xs uppercase font-bold tracking-widest text-primary/50">Poder de Fogo</p>
                 </div>
               </div>
+            </div>
+            <div className="relative group overflow-hidden rounded-3xl shadow-2xl order-1 sm:order-2">
+               <Image 
+                 src="/producao-real.gif" 
+                 alt="Processo Ouroplas" 
+                 width={500}
+                 height={500}
+                 className="img-cover gold-filter" 
+                 unoptimized
+               />
+               <div className="absolute-fill flex-center opacity-0 group-hover:opacity-100 transition-all" style={{ background: 'rgba(5, 10, 48, 0.4)' }}>
+                  <span className="text-white font-bold tracking-widest uppercase text-sm">Produção Real</span>
+               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Section 2: Technical Workflow (Cards with Overlap) */}
-      <section id="especialista" className="section bg-section relative overflow-hidden">
-        <div className="container relative z-10">
-          <div className="section-header text-center lg:text-left mb-16">
-            <span className="text-secondary font-bold uppercase tracking-widest text-sm mb-2 block">Diferenciais Estratégicos</span>
-            <h2 className="text-4xl sm:text-5xl font-bold text-primary">Tecnologia que Move o Setor</h2>
+      {/* Diferenciais Section */}
+      <section id="especialista" className="section bg-section">
+        <div className="container">
+          <div className="section-header text-center mb-16">
+            <span className="text-secondary font-bold uppercase tracking-wider text-sm mb-2 block">Alta Performance</span>
+            <h2 className="text-4xl">Diferenciais Estratégicos</h2>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-3">
             {[
               { 
-                title: "Desenvolvimento de Moldes", 
-                desc: "Equipe especializada na análise e criação de moldes otimizados para redução de ciclo.", 
-                img: "/gallery/como_trabalhamos.jpg",
-                feat: "Alta Precisão"
+                title: "Moldagem de Precisão", 
+                desc: "Equipe técnica dedicada à otimização de moldes para garantia de produtividade máxima.", 
+                img: "/gallery/como_trabalhamos.jpg" 
               },
               { 
                 title: "Injeção em Escala", 
-                desc: "Máquinas robustas de 80 a 300 toneladas prontas para demandas de alta complexidade.", 
-                img: "/gallery/oquefazemos_ouroplas.jpg",
-                feat: "Agilidade Industrial"
+                desc: "Capacidade diversificada com injetoras de 80 a 300 toneladas atendendo diversos setores.", 
+                img: "/gallery/oquefazemos_ouroplas.jpg" 
               },
               { 
-                title: "Soluções Sustentáveis", 
-                desc: "Foco no reaproveitamento inteligente e economia circular em todo o processo.", 
-                img: "/gallery/nossos_diferenciais.jpg",
-                feat: "Eco-Friendly"
+                title: "Eco Industrial", 
+                desc: "Compromisso com o reaproveitamento e eficiência energética em toda a linha fabril.", 
+                img: "/gallery/nossos_diferenciais.jpg" 
               }
-            ].map((step, idx) => (
-              <div key={idx} className="group glass-card overflow-hidden">
-                <div className="relative h-64 -mx-10 -mt-10 mb-8 rounded-b-3xl overflow-hidden">
-                  <Image src={step.img} alt={step.title} fill className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700 hover:scale-105" />
-                  <div className="absolute top-12 left-10 bg-secondary text-primary px-3 py-1 font-bold text-[10px] rounded-full uppercase tracking-widest">
-                    {step.feat}
-                  </div>
+            ].map((item, idx) => (
+              <div key={idx} className="glass-card group hover:scale-hover transition-all">
+                <div className="relative aspect-video rounded-2xl overflow-hidden mb-8 shadow-lg">
+                  <Image src={item.img} alt={item.title} fill className="img-cover grayscale group-hover:grayscale-0 transition-all" />
+                  <div className="absolute inset-x-0 bottom-0 h-1 bg-secondary w-0 group-hover:w-full transition-all duration-700"></div>
                 </div>
-                <h3 className="text-2xl font-bold text-primary mb-4">{step.title}</h3>
-                <p className="text-muted leading-relaxed text-sm mb-6">{step.desc}</p>
+                <h3 className="mb-4 text-2xl">{item.title}</h3>
+                <p className="text-muted leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Section 3: Industrial Trust (Banner) */}
-      <section className="relative py-32 sm:py-48 overflow-hidden bg-primary">
-        <Image 
-          src="/gallery/garantia ouroplas.jpg" 
-          alt="Garantia Industrial" 
-          fill 
-          className="object-cover opacity-30 select-none"
-        />
-        <div className="container relative z-10 text-center">
-            <div className="max-w-4xl mx-auto px-6">
-              <span className="text-secondary font-bold uppercase tracking-[0.3em] text-sm mb-6 block">Nosso Compromisso</span>
-              <h2 className="text-white text-4xl sm:text-6xl font-bold mb-8 leading-tight">
-                "Quando a produção termina, o compromisso continua."
-              </h2>
-              <p className="text-white/80 text-lg sm:text-2xl font-light italic mb-12 max-w-2xl mx-auto">
-                Injeção técnica com escala industrial e entrega pronta para o seu negócio crescer sem gargalos.
-              </p>
-              <button className="btn btn-secondary btn-lg px-12" onClick={() => setIsModalOpen(true)}>Consultoria Técnica Gratuita</button>
+      {/* Seção Técnica - Foco na Máquina */}
+      <section className="relative section py-0 overflow-hidden bg-primary">
+        <div className="relative aspect-video tech-banner">
+          <video autoPlay muted loop playsInline className="img-cover gold-filter opacity-40" aria-hidden="true">
+            <source src="/hero-optimized.mp4" type="video/mp4" />
+          </video>
+          <div className="absolute-fill flex-center text-center">
+            <div className="container max-w-4xl px-6">
+              <h2 className="text-white text-4xl sm:text-6xl font-bold mb-6">Alta Escala Industrial</h2>
+              <p className="text-white mb-10 text-xl sm:text-2xl">Precisão milimétrica em cada ciclo de injeção.</p>
+              <button 
+                className="btn btn-secondary btn-lg px-12 shadow-2xl"
+                onClick={() => setIsModalOpen(true)}
+              >
+                Solicitar Visita Técnica
+              </button>
             </div>
+          </div>
         </div>
       </section>
 
       {/* Instagram Feed Section */}
       <InstagramFeed username={config.instagram_username} url={config.instagram_url} />
 
-      {/* Simple Service Grid (Diferenciais) */}
+      {/* Grid de Diferenciais Finais */}
       <section className="section bg-white">
         <div className="container">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
+          <div className="grid grid-4 gap-12">
             {services.map((service, index) => (
-              <div key={index} className="border-l-2 border-secondary/20 pl-8">
-                <h4 className="text-primary font-bold text-xl mb-3">{service.title}</h4>
-                <p className="text-muted text-sm leading-relaxed">{service.description}</p>
+              <div key={index} className="service-finish-card group">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-8 h-1 bg-secondary group-hover:w-12 transition-all"></div>
+                  <h4 className="text-xl font-bold group-hover:text-secondary transition-colors">{service.title}</h4>
+                </div>
+                <p className="text-muted leading-relaxed text-sm">{service.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="footer bg-primary text-white">
-        <div className="container footer-content pt-20">
-          <div className="footer-brand">
-            <div className="flex items-center gap-3 mb-6">
-               <div className="relative w-12 h-12">
-                 <Image src="/ouroplas-logo.jpg" alt="Ouroplas Logo" fill className="object-contain" />
-               </div>
-               <span className="font-bold text-2xl tracking-tighter">OUROPLAS</span>
+      {/* Footer Industrial */}
+      <footer className="footer bg-dark-accent text-white">
+        <div className="container">
+          <div className="footer-main">
+            <div className="footer-col">
+              <div className="flex items-center gap-4 mb-4">
+                <Image 
+                  src="/ouroplas-logo.jpg" 
+                  alt="Logo" 
+                  width={60} 
+                  height={60} 
+                  className="rounded-lg" 
+                />
+                <span className="text-3xl font-black tracking-tighter">OUROPLAS</span>
+              </div>
+              <p className="text-white/40 leading-relaxed text-sm max-w-xs">
+                Especialistas em injeção de termoplásticos técnicos. 
+                Precisão Curitibana com alcance nacional.
+              </p>
             </div>
-            <p className="max-w-xs text-white/60 leading-relaxed">Referência em injeção de peças plásticas industriais e desenvolvimento de moldes sob demanda.</p>
+
+            <div className="footer-col">
+              <h4 className="text-secondary uppercase tracking-[0.2em] text-xs font-bold mb-2">Engenharia | Fábrica</h4>
+              <p className="text-white/60 text-sm mb-4">Unidade Industrial Estratégica</p>
+              <p className="font-bold text-lg text-white">{config.contact_email}</p>
+              <p className="text-white/30 text-xs italic">Atendimento Técnico Comercial</p>
+            </div>
+
+            <div className="footer-col sm:items-end sm:text-right">
+              <h4 className="text-secondary uppercase tracking-[0.2em] text-xs font-bold mb-2">Atendimento Direto</h4>
+              <p className="text-3xl sm:text-4xl font-black text-white mb-4">
+                {config.whatsapp_number ? `+55 ${config.whatsapp_number.slice(0,2)} ${config.whatsapp_number.slice(2)}` : '+55 (41) 99820-2737'}
+              </p>
+              <div className="bg-white/5 py-2 px-4 rounded-full inline-block">
+                <p className="text-white/40 text-xs uppercase tracking-widest font-bold">Segunda a Sexta • 08h às 18h</p>
+              </div>
+            </div>
           </div>
-          <div className="footer-links">
-            <h4 className="text-secondary font-bold uppercase tracking-widest text-sm mb-8">Navegação</h4>
-            <nav className="flex flex-col gap-4">
-              <a href="#home" className="hover:text-secondary transition-colors">Início</a>
-              <a href="#sobre" className="hover:text-secondary transition-colors">A Ouroplas</a>
-              <a href="#especialista" className="hover:text-secondary transition-colors">Tecnologia</a>
-              <a href="#contato" className="hover:text-secondary transition-colors">Fale Conosco</a>
-            </nav>
-          </div>
-          <div className="footer-contact">
-            <h4 className="text-secondary font-bold uppercase tracking-widest text-sm mb-8">Unidade Curitiba</h4>
-            <p className="text-white/60 mb-2">Atendimento para todo o Brasil.</p>
-            <p className="text-white font-bold mb-1">wcdopradoinjecao@gmail.com</p>
-            <p className="text-white text-2xl font-bold mt-4">
-              +55 (41) 99820-2737
-            </p>
-          </div>
-        </div>
-        <div className="footer-bottom border-t border-white/5 py-10 mt-20 opacity-40">
-          <div className="container text-center">
+
+          <div className="footer-bottom">
             <p>&copy; {new Date().getFullYear()} Ouroplas Indústria e Comércio de Plásticos Ltda.</p>
+            <div className="flex gap-6">
+              <a href="#" className="hover:text-secondary">Privacidade</a>
+              <a href="#" className="hover:text-secondary">Termos</a>
+            </div>
           </div>
         </div>
       </footer>
 
-      <WhatsAppFloat number={config.whatsapp_number} />
-      <ContactModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      {/* Botão Flutuante Professional */}
+      <button 
+        className="whatsapp-float shadow-2xl"
+        onClick={() => setIsModalOpen(true)}
+        aria-label="Solicitar Orçamento"
+      >
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+          <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.025 3.207l-.694 2.547 2.628-.69c.906.571 1.638.924 2.809.925h.003c3.181 0 5.767-2.586 5.768-5.767 0-3.18-2.587-5.767-5.768-5.767l-.003-.001zm3.205 8.151c-.133.374-.752.713-1.034.758-.274.044-.549.074-1.579-.345-1.04-.423-1.709-1.474-1.758-1.543-.05-.069-.41-1.08-.41-1.08l.001-.001c0-.528.27-.8.361-.89l.274-.31c.091-.091.21-.141.31-.141h.231l.21.033.42 1.004c.05.12.079.249.01.389l-.21.42s-.167.185-.01.353c.158.168.618.665.918.963.3.298.549.336.758.204l.58-.5c.13-.11.26-.08.41-.03l1.104.532c.15.07.25.13.29.21.04.09.04.51-.09.886z"/>
+        </svg>
+        <span>Solicitar Orçamento</span>
+      </button>
+
+      <ContactModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        whatsappNumber={config.whatsapp_number}
+      />
     </main>
   );
 }
