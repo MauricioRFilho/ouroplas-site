@@ -121,7 +121,7 @@ export default function Home() {
           className="hero-video gold-filter"
           aria-hidden="true"
         >
-          <source src="/hero-lite.mp4" type="video/mp4" />
+          <source src="/hero-new.mp4" type="video/mp4" />
         </video>
         <div className="video-overlay"></div>
 
@@ -144,6 +144,35 @@ export default function Home() {
           <div className="flex justify-center gap-4">
             <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}>Conheça nossa tecnologia</button>
           </div>
+        </div>
+      </section>
+
+      {/* Process Section (Preserving the GIF) */}
+      <section className="section" style={{ backgroundColor: 'var(--color-primary)', color: 'white', overflow: 'hidden' }}>
+        <div className="container about-grid">
+           <div 
+             className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl gold-filter"
+             style={{ 
+               backgroundImage: 'url("/hero.gif")', 
+               backgroundSize: 'cover', 
+               backgroundPosition: 'center',
+               opacity: 0.8
+             }}
+           >
+             <div className="absolute inset-0 bg-black/20"></div>
+           </div>
+           <div>
+             <span className="text-secondary font-bold uppercase tracking-wider text-sm">Nossa Tecnologia</span>
+             <h2 className="mb-6 mt-2 text-white">Produção de Alta Performance</h2>
+             <p className="opacity-80 mb-8 leading-relaxed">
+               Utilizamos processos automatizados e monitoramento constante para garantir que cada peça injetada atenda aos mais rigorosos padrões de qualidade do mercado industrial.
+             </p>
+             <ul className="flex flex-col gap-3">
+                <li className="flex items-center gap-2">✅ Ciclos de injeção otimizados</li>
+                <li className="flex items-center gap-2">✅ Matéria-prima de primeira linha</li>
+                <li className="flex items-center gap-2">✅ Rigoroso controle de qualidade</li>
+             </ul>
+           </div>
         </div>
       </section>
 
