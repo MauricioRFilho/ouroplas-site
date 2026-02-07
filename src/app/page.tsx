@@ -148,7 +148,7 @@ export default function Home() {
       </section>
 
       {/* Process Section (Preserving the GIF) */}
-      <section className="section" style={{ backgroundColor: 'var(--color-primary)', color: 'white', overflow: 'hidden' }}>
+      <section className="section bg-section">
         <div className="container about-grid">
            <div 
              className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl gold-filter"
@@ -156,32 +156,32 @@ export default function Home() {
                backgroundImage: 'url("/hero.gif")', 
                backgroundSize: 'cover', 
                backgroundPosition: 'center',
-               opacity: 0.8
+               opacity: 0.9
              }}
            >
-             <div className="absolute inset-0 bg-black/20"></div>
+             <div className="absolute inset-0 bg-primary/10"></div>
            </div>
            <div>
              <span className="text-secondary font-bold uppercase tracking-wider text-sm">Nossa Tecnologia</span>
-             <h2 className="mb-6 mt-2 text-white">Produção de Alta Performance</h2>
-             <p className="opacity-80 mb-8 leading-relaxed">
+             <h2 className="mb-6 mt-2">Produção de Alta Performance</h2>
+             <p className="text-muted mb-8 leading-relaxed">
                Utilizamos processos automatizados e monitoramento constante para garantir que cada peça injetada atenda aos mais rigorosos padrões de qualidade do mercado industrial.
              </p>
              <ul className="flex flex-col gap-3">
-                <li className="flex items-center gap-2">✅ Ciclos de injeção otimizados</li>
-                <li className="flex items-center gap-2">✅ Matéria-prima de primeira linha</li>
-                <li className="flex items-center gap-2">✅ Rigoroso controle de qualidade</li>
+                <li className="flex items-center gap-2 text-primary font-bold">✅ Ciclos de injeção otimizados</li>
+                <li className="flex items-center gap-2 text-primary font-bold">✅ Matéria-prima de primeira linha</li>
+                <li className="flex items-center gap-2 text-primary font-bold">✅ Rigoroso controle de qualidade</li>
              </ul>
            </div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section id="servicos" className="section bg-light">
+      <section id="servicos" className="section bg-white">
         <div className="container">
-          <div className="section-header">
-            <h2 className="mb-4">Nossas Soluções industriais</h2>
-            <p>Infraestrutura completa para atender demandas de alta complexidade com rigor documental e técnico.</p>
+          <div className="section-header mb-12" style={{ textAlign: 'center' }}>
+            <h2 className="mb-4">Nossas Soluções Industriais</h2>
+            <p className="max-w-2xl mx-auto">Infraestrutura completa para atender demandas de alta complexidade com rigor documental e técnico.</p>
           </div>
           <div className="services-grid">
             {services.map((service, index) => (

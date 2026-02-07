@@ -12,7 +12,7 @@
   /* Backgrounds */
   --bg-light: #ffffff;
   --bg-dark: #0f172a;
-  --bg-section: #f9fafb;
+  --bg-section: #f3f5f9; /* Fixed: Slightly different from pure white/primary for section contrast */
 
   /* Spacing */
   --max-width: 1200px;
@@ -271,6 +271,7 @@ p {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr));
   gap: 2rem;
+  margin-top: 3rem; /* Fixed: Added spacing from header text */
 }
 
 .card {
