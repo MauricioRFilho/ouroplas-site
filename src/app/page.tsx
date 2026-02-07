@@ -14,9 +14,9 @@ export default function Home() {
   const [config, setConfig] = useState<any>({
     hero_title: "Escalamos seu Projeto com Injeção de Precisão",
     whatsapp_number: "5541998202737",
-    contact_email: "contato@ouroplas.com.br",
-    about_title: "Do Molde à Peça: Solução Completa em Plásticos",
-    about_text: "Localizada em Curitiba, a Ouroplas é especialista em transformar projetos técnicos em produção real. Unimos o desenvolvimento de moldes sob medida com processos de injeção de alta performance para entregar peças com rigor industrial.",
+    contact_email: "wcdopradoinjecao@gmail.com",
+    about_title: "Excelência em Injeção de Peças Plásticas",
+    about_text: "A Ouroplas atende às necessidades de indústrias que buscam qualidade, confiabilidade e eficiência produtiva. Com injetoras de 80 a 300 toneladas, oferecemos soluções técnicas adequadas, cumprimento de prazos e excelente custo-benefício.",
     instagram_username: "@ouroplas"
   });
   const [services, setServices] = useState<any[]>([]);
@@ -37,9 +37,10 @@ export default function Home() {
         setServices(servicesData);
       } else {
         setServices([
-          { title: "Desenvolvimento de Moldes", description: "Engenharia dedicada para criar moldes industriais sob medida, focados em durabilidade e precisão técnica." },
-          { title: "Injeção de Alta Performance", description: "Infraestrutura com máquinas Tederic de última geração para injeção de peças técnicas em larga escala." },
-          { title: "Logística e Distribuição", description: "Localização estratégica em Curitiba para atender indústrias em todo o Brasil com agilidade e compromisso." }
+          { title: "Desenvolvimento de Moldes", description: "Moldes desenvolvidos sob medida conforme a necessidade e complexidade do seu projeto." },
+          { title: "Produção Padronizada", description: "Injeção contínua com rigoroso controle de qualidade para garantir peças idênticas em larga escala." },
+          { title: "Logística Inteligente", description: "Entrega gratuita em Curitiba e envios ágeis para indústrias em todo o território nacional." },
+          { title: "Sustentabilidade", description: "Foco no reaproveitamento de materiais e redução drástica de desperdícios no processo produtivo." }
         ]);
       }
     }
@@ -140,9 +141,13 @@ export default function Home() {
         <div className="container" style={{ maxWidth: '800px', textAlign: 'center' }}>
           <span className="text-secondary font-bold uppercase tracking-wider text-sm">📍 Curitiba | Atendimento Nacional</span>
           <h2 className="mb-6 mt-2">{config.about_title}</h2>
-          <p className="text-muted mb-8 leading-relaxed text-lg">{config.about_text}</p>
+            <p className="text-muted mb-8 leading-relaxed text-lg">
+            {config.about_text}
+            <br /><br />
+            <strong>Nosso objetivo é construir parcerias sólidas e duradouras, entregando resultados consistentes em cada projeto.</strong>
+          </p>
           <div className="flex justify-center gap-4">
-            <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}>Conheça nossa tecnologia</button>
+            <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}>Solicitar Orçamento Técnico</button>
           </div>
         </div>
       </section>
@@ -162,15 +167,15 @@ export default function Home() {
              <div className="absolute inset-0 bg-primary/10"></div>
            </div>
            <div>
-             <span className="text-secondary font-bold uppercase tracking-wider text-sm">Nossa Tecnologia</span>
-             <h2 className="mb-6 mt-2">Produção de Alta Performance</h2>
+             <span className="text-secondary font-bold uppercase tracking-wider text-sm">Capacidade e Tecnologia</span>
+             <h2 className="mb-6 mt-2">Maquinário de Ponta</h2>
              <p className="text-muted mb-8 leading-relaxed">
-               Utilizamos processos automatizados e monitoramento constante para garantir que cada peça injetada atenda aos mais rigorosos padrões de qualidade do mercado industrial.
+               Contamos com máquinas de diferentes portes, permitindo oferecer soluções técnicas precisas para peças de variados tamanhos e complexidades.
              </p>
              <ul className="flex flex-col gap-3">
-                <li className="flex items-center gap-2 text-primary font-bold">✅ Ciclos de injeção otimizados</li>
-                <li className="flex items-center gap-2 text-primary font-bold">✅ Matéria-prima de primeira linha</li>
-                <li className="flex items-center gap-2 text-primary font-bold">✅ Rigoroso controle de qualidade</li>
+                <li className="flex items-center gap-2 text-primary font-bold">✅ Injetoras de 80 a 300 Toneladas</li>
+                <li className="flex items-center gap-2 text-primary font-bold">✅ Controle de Qualidade Padronizado</li>
+                <li className="flex items-center gap-2 text-primary font-bold">✅ Equipe Técnica Qualificada</li>
              </ul>
            </div>
         </div>
@@ -180,8 +185,8 @@ export default function Home() {
       <section id="servicos" className="section bg-white">
         <div className="container">
           <div className="section-header mb-12" style={{ textAlign: 'center' }}>
-            <h2 className="mb-4">Nossas Soluções Industriais</h2>
-            <p className="max-w-2xl mx-auto">Infraestrutura completa para atender demandas de alta complexidade com rigor documental e técnico.</p>
+            <h2 className="mb-4">Diferenciais Ouroplas</h2>
+            <p className="max-w-2xl mx-auto">Unimos eficiência produtiva com compromisso logístico e sustentável.</p>
           </div>
           <div className="services-grid">
             {services.map((service, index) => (
@@ -221,13 +226,13 @@ export default function Home() {
             <nav className="flex flex-col">
               <a href="#home">Início</a>
               <a href="#sobre">Sobre Nós</a>
-              <a href="#servicos">Nossas Soluções</a>
+              <a href="#servicos">Diferenciais</a>
             </nav>
           </div>
           <div className="footer-contact">
             <h4>📍 Unidade Curitiba</h4>
             <p>Rua Exemplo, 123 - Cidade Industrial</p>
-            <p>{config.contact_email}</p>
+            <p className="break-all">{config.contact_email}</p>
             <p className="font-bold text-white text-lg">
               {config.whatsapp_number.replace(/^(\d{2})(\d{2})(\d{5})(\d{4})$/, '+$1 ($2) $3-$4')}
             </p>
