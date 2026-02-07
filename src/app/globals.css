@@ -171,8 +171,8 @@ p {
 
 /* Hero Modern */
 .hero {
-  height: 60vh;
-  min-height: 500px;
+  height: 90vh;
+  min-height: 700px;
   display: flex;
   align-items: center;
   position: relative;
@@ -326,6 +326,38 @@ p {
   text-align: center;
   font-size: 0.8125rem;
   color: rgba(255,255,255,0.4);
+}
+
+/* Restore Premium Spacing */
+.section {
+  padding: clamp(4rem, 10vw, 8rem) 0;
+}
+
+.section-header {
+  margin-bottom: 4rem;
+}
+
+.text-gold {
+  color: var(--color-secondary);
+}
+
+.bg-dark-accent {
+  background-color: #03061A;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 24px;
+  padding: 2.5rem;
+  transition: all 0.3s ease;
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--color-secondary);
+  transform: translateY(-5px);
 }
 
 /* Responsive Mobile Mixins */
