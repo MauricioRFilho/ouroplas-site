@@ -113,17 +113,16 @@ export default function Home() {
 
       {/* Hero Section */}
       <section id="home" className="hero">
-        {/* Usando o GIF como fallback principal para evitar lag de processamento de vídeo em dispositivos mais lentos */}
-        <div 
-          className="hero-video gold-filter" 
-          style={{ 
-            backgroundImage: 'url("/hero.gif")', 
-            backgroundSize: 'cover', 
-            backgroundPosition: 'center',
-            opacity: 0.7 
-          }}
+        <video 
+          autoPlay 
+          muted 
+          loop 
+          playsInline 
+          className="hero-video gold-filter"
           aria-hidden="true"
-        ></div>
+        >
+          <source src="/hero-lite.mp4" type="video/mp4" />
+        </video>
         <div className="video-overlay"></div>
 
         <div className="container hero-content">
