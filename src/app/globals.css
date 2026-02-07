@@ -196,8 +196,12 @@ p {
 .video-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to right, rgba(5,10,48,0.95), rgba(5,10,48,0.4));
+  background: linear-gradient(to right, rgba(5,10,48,0.9) 0%, rgba(255, 179, 0, 0.1) 100%);
   z-index: 1;
+}
+
+.gold-filter {
+  filter: sepia(0.3) saturate(1.5) hue-rotate(-15deg) brightness(0.8);
 }
 
 .hero-content {

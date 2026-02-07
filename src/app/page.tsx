@@ -115,12 +115,12 @@ export default function Home() {
       <section id="home" className="hero">
         {/* Usando o GIF como fallback principal para evitar lag de processamento de vídeo em dispositivos mais lentos */}
         <div 
-          className="hero-video" 
+          className="hero-video gold-filter" 
           style={{ 
             backgroundImage: 'url("/hero.gif")', 
             backgroundSize: 'cover', 
             backgroundPosition: 'center',
-            opacity: 0.6 
+            opacity: 0.7 
           }}
           aria-hidden="true"
         ></div>
@@ -137,34 +137,13 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section id="sobre" className="section">
-        <div className="container about-grid">
-          <div>
-            <span className="text-secondary font-bold uppercase tracking-wider text-sm">📍 Curitiba | Atendimento Nacional</span>
-            <h2 className="mb-6 mt-2">{config.about_title}</h2>
-            <p className="text-muted mb-8 leading-relaxed">{config.about_text}</p>
-            <div className="flex gap-4">
-              <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}>Falar com Comercial</button>
-            </div>
-          </div>
-          <div 
-            className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl bg-secondary"
-            style={{ 
-              backgroundImage: 'url("/hero.gif")', 
-              backgroundSize: 'cover', 
-              backgroundPosition: 'center' 
-            }}
-          >
-            <div className="absolute inset-0 bg-primary/40 backdrop-blur-sm flex items-center justify-center p-8">
-               <div className="relative w-24 h-24 sm:w-32 sm:h-32">
-                 <Image 
-                   src="/ouroplas-logo.jpg" 
-                   alt="Ouroplas Factory" 
-                   fill
-                   className="object-contain rounded-xl shadow-lg"
-                 />
-               </div>
-            </div>
+      <section id="sobre" className="section bg-section">
+        <div className="container" style={{ maxWidth: '800px', textAlign: 'center' }}>
+          <span className="text-secondary font-bold uppercase tracking-wider text-sm">📍 Curitiba | Atendimento Nacional</span>
+          <h2 className="mb-6 mt-2">{config.about_title}</h2>
+          <p className="text-muted mb-8 leading-relaxed text-lg">{config.about_text}</p>
+          <div className="flex justify-center gap-4">
+            <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}>Conheça nossa tecnologia</button>
           </div>
         </div>
       </section>
