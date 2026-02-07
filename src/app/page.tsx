@@ -113,17 +113,17 @@ export default function Home() {
 
       {/* Hero Section */}
       <section id="home" className="hero">
-        <video 
-          autoPlay 
-          muted 
-          loop 
-          playsInline 
-          className="hero-video"
+        {/* Usando o GIF como fallback principal para evitar lag de processamento de vídeo em dispositivos mais lentos */}
+        <div 
+          className="hero-video" 
+          style={{ 
+            backgroundImage: 'url("/hero.gif")', 
+            backgroundSize: 'cover', 
+            backgroundPosition: 'center',
+            opacity: 0.6 
+          }}
           aria-hidden="true"
-        >
-          <source src="/hero-optimized.mp4" type="video/mp4" />
-          <source src="/hero-background.mov" type="video/quicktime" />
-        </video>
+        ></div>
         <div className="video-overlay"></div>
 
         <div className="container hero-content">
@@ -147,23 +147,21 @@ export default function Home() {
               <button className="btn btn-primary" onClick={() => setIsModalOpen(true)}>Falar com Comercial</button>
             </div>
           </div>
-          <div className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl bg-secondary">
-            <video 
-              autoPlay 
-              muted 
-              loop 
-              playsInline 
-              className="absolute inset-0 w-full h-full object-cover opacity-50"
-            >
-              <source src="/hero-optimized.mp4" type="video/mp4" />
-            </video>
-            <div className="absolute inset-0 flex items-center justify-center p-8">
+          <div 
+            className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl bg-secondary"
+            style={{ 
+              backgroundImage: 'url("/hero.gif")', 
+              backgroundSize: 'cover', 
+              backgroundPosition: 'center' 
+            }}
+          >
+            <div className="absolute inset-0 bg-primary/40 backdrop-blur-sm flex items-center justify-center p-8">
                <div className="relative w-24 h-24 sm:w-32 sm:h-32">
                  <Image 
                    src="/ouroplas-logo.jpg" 
                    alt="Ouroplas Factory" 
                    fill
-                   className="object-contain rounded-xl"
+                   className="object-contain rounded-xl shadow-lg"
                  />
                </div>
             </div>

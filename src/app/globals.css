@@ -171,14 +171,15 @@ p {
 
 /* Hero Modern */
 .hero {
-  height: 100vh;
-  min-height: 600px;
+  height: 60vh;
+  min-height: 500px;
   display: flex;
   align-items: center;
   position: relative;
   color: white;
-  background-color: var(--color-primary); /* Use brand navy blue as fallback */
+  background-color: var(--color-primary);
   overflow: hidden;
+  will-change: transform; /* Performance hint */
 }
 
 .hero-video {
@@ -188,6 +189,8 @@ p {
   height: 100%;
   object-fit: cover;
   z-index: 0;
+  pointer-events: none;
+  opacity: 0.8;
 }
 
 .video-overlay {
