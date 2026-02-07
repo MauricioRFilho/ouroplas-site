@@ -152,8 +152,67 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Process Section (Preserving the GIF) */}
-      <section className="section bg-section">
+      {/* Quem Somos & Missão */}
+      <section className="section bg-white">
+        <div className="container about-grid">
+          <div className="order-2 sm:order-1">
+            <span className="text-secondary font-bold uppercase tracking-wider text-sm">Quem Somos</span>
+            <h2 className="mb-6 mt-2">Especialistas em Moldes e Injeção</h2>
+            <p className="text-muted mb-6 leading-relaxed">
+              Com produção de qualidade, agilidade e atendimento flexível, que fazem parte da nossa essência, construímos parcerias que seguem crescendo junto com a Ouroplas. Somos focados em transformar sua necessidade em realidade industrial.
+            </p>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-4 bg-light rounded-xl border border-secondary/10">
+                <h4 className="text-primary font-bold mb-1">Qualidade</h4>
+                <p className="text-xs text-muted">Rigoroso controle em cada peça.</p>
+              </div>
+              <div className="p-4 bg-light rounded-xl border border-secondary/10">
+                <h4 className="text-primary font-bold mb-1">Agilidade</h4>
+                <p className="text-xs text-muted">Prazos cumpridos com seriedade.</p>
+              </div>
+            </div>
+          </div>
+          <div className="order-1 sm:order-2 relative aspect-[4/3] rounded-3xl overflow-hidden shadow-xl">
+            <Image 
+              src="/gallery/quemsomos_ourplas.jpg" 
+              alt="Especialistas Ouroplas desenvolvendo moldes e injetando peças plásticas com precisão." 
+              fill
+              className="object-cover"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Como Trabalhamos */}
+      <section className="section bg-section overflow-hidden">
+        <div className="container">
+          <div className="section-header mb-12" style={{ textAlign: 'center' }}>
+            <span className="text-secondary font-bold uppercase tracking-wider text-sm">Workflow</span>
+            <h2 className="mb-4">Como Trabalhamos</h2>
+            <p className="max-w-2xl mx-auto">Acompanhamos cada etapa do seu projeto, do desenvolvimento do molde à entrega final.</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              { title: "Desenvolvimento", desc: "Criação técnica do molde ideal para o seu projeto.", img: "/gallery/como_trabalhamos.jpg" },
+              { title: "Injeção Técnica", desc: "Processo de alta precisão com máquinas modernas.", img: "/gallery/oquefazemos_ouroplas.jpg" },
+              { title: "Produção", desc: "Escalabilidade conforme sua demanda industrial.", img: "/gallery/ouroplas injecao.jpg" },
+              { title: "Entrega Pronta", desc: "Logística ágil e peças prontas para uso imediato.", img: "/gallery/garantia ouroplas.jpg" }
+            ].map((step, idx) => (
+              <div key={idx} className="group relative h-80 rounded-2xl overflow-hidden shadow-lg transition-transform hover:-translate-y-2">
+                <Image src={step.img} alt={step.title} fill className="object-cover transition-transform group-hover:scale-110" />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent opacity-90 p-6 flex flex-col justify-end">
+                  <h4 className="text-white font-bold text-xl mb-2">{step.title}</h4>
+                  <p className="text-white/80 text-sm">{step.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Capacidade e Diferenciais (Com GIF e Novos Dados) */}
+      <section className="section bg-white overflow-hidden">
         <div className="container about-grid">
            <div 
              className="relative aspect-video rounded-3xl overflow-hidden shadow-2xl gold-filter"
@@ -170,31 +229,58 @@ export default function Home() {
              <span className="text-secondary font-bold uppercase tracking-wider text-sm">Capacidade e Tecnologia</span>
              <h2 className="mb-6 mt-2">Maquinário de Ponta</h2>
              <p className="text-muted mb-8 leading-relaxed">
-               Contamos com máquinas de diferentes portes, permitindo oferecer soluções técnicas precisas para peças de variados tamanhos e complexidades.
+               Contamos com máquinas de diferentes portes, de 80 a 300 toneladas, permitindo oferecer soluções técnicas precisas para peças de diversos setores industriais.
              </p>
-             <ul className="flex flex-col gap-3">
-                <li className="flex items-center gap-2 text-primary font-bold">✅ Injetoras de 80 a 300 Toneladas</li>
-                <li className="flex items-center gap-2 text-primary font-bold">✅ Controle de Qualidade Padronizado</li>
-                <li className="flex items-center gap-2 text-primary font-bold">✅ Equipe Técnica Qualificada</li>
+             <ul className="flex flex-col gap-4">
+                {[
+                  "Processo completo (molde + injeção)",
+                  "Disponibilidade estendida para grandes lotes",
+                  "Entrega gratuita em Curitiba e envios nacionais",
+                  "Reaproveitamento e foco em sustentabilidade"
+                ].map((item, i) => (
+                  <li key={i} className="flex items-center gap-3 text-primary font-bold bg-light p-3 rounded-lg border-l-4 border-secondary">
+                    <span className="text-secondary">✔</span> {item}
+                  </li>
+                ))}
              </ul>
            </div>
         </div>
       </section>
 
       {/* Services Section */}
-      <section id="servicos" className="section bg-white">
+      <section id="servicos" className="section bg-section">
         <div className="container">
           <div className="section-header mb-12" style={{ textAlign: 'center' }}>
+            <span className="text-secondary font-bold uppercase tracking-wider text-sm">Serviços Especializados</span>
             <h2 className="mb-4">Diferenciais Ouroplas</h2>
-            <p className="max-w-2xl mx-auto">Unimos eficiência produtiva com compromisso logístico e sustentável.</p>
+            <p className="max-w-2xl mx-auto">Unimos eficiência produtiva com compromisso logístico e rigor técnico industrial.</p>
           </div>
           <div className="services-grid">
             {services.map((service, index) => (
-              <article className="card" key={service.id || index}>
-                <h3 className="mb-3">{service.title}</h3>
-                <p>{service.description}</p>
+              <article className="card group hover:bg-primary transition-colors duration-300" key={service.id || index}>
+                <h3 className="mb-3 group-hover:text-white">{service.title}</h3>
+                <p className="group-hover:text-white/80">{service.description}</p>
               </article>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Compromisso e Garantia (Image Banner) */}
+      <section className="section py-0">
+        <div className="relative h-[400px] sm:h-[500px] w-full">
+          <Image 
+            src="/gallery/garantia ouroplas.jpg" 
+            alt="Garantia Ouroplas: Quando a produção termina, o compromisso continua." 
+            fill 
+            className="object-cover brightness-50" 
+          />
+          <div className="absolute inset-0 flex items-center justify-center text-center p-6">
+            <div className="max-w-3xl">
+              <h2 className="text-white text-3xl sm:text-5xl font-bold mb-6">Quando a produção termina, o compromisso continua.</h2>
+              <p className="text-white/90 text-xl sm:text-2xl mb-8 font-light italic">"Molde bem fabricado, injeção em escala e entrega pronta para o seu negócio."</p>
+              <button className="btn btn-secondary btn-lg" onClick={() => setIsModalOpen(true)}>Inicie seu Atendimento Técnico</button>
+            </div>
           </div>
         </div>
       </section>

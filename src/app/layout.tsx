@@ -16,17 +16,17 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Ouroplas | Injeção de Plásticos com Precisão e Qualidade",
-  description: "Especialistas em injeção plástica técnica, moldes e peças de alta precisão. Soluções industriais em polímeros com qualidade certificada e entrega rápida.",
-  keywords: ["injeção plástica", "peças técnicas", "moldes para plástico", "indústria de plásticos", "Ouroplas", "precisão industrial"],
+  title: "Ouroplas | Injeção Plástica Técnica e Desenvolvimento de Moldes",
+  description: "Especialistas em injeção plástica de precisão em Curitiba. Desenvolvimento de moldes industriais, injeção de 80 a 300 toneladas e soluções completas em polímeros para indústrias de todo o Brasil.",
+  keywords: ["injeção plástica Curitiba", "desenvolvimento de moldes", "injeção técnica de plásticos", "peças plásticas industriais", "Ouroplas", "injetoras 300 toneladas", "indústria polímeros Brasil", "moldes sob medida"],
   authors: [{ name: "Ouroplas Indústria" }],
   publisher: "Ouroplas",
   alternates: {
-    canonical: "https://ouroplas-site.vercel.app", // Adjust if main domain changes
+    canonical: "https://ouroplas.com.br", // Link oficial
   },
   openGraph: {
-    title: "Ouroplas | Injeção de Plásticos com Precisão",
-    description: "Referência em injeção plástica técnica e moldagem de alta qualidade.",
+    title: "Ouroplas | Soluções Completas em Injeção Plástica",
+    description: "Referência técnica em moldes e injeção plástica de alta performance para grandes demandas industriais.",
     url: "https://ouroplas-site.vercel.app",
     siteName: "Ouroplas",
     images: [
