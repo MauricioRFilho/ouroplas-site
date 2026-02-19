@@ -54,6 +54,7 @@ export default function InstagramFeed({ username = "@ouroplas", url = "https://i
                      alt={`Instagram post ${post.id}`}
                      fill
                      className="img-cover transition-all grayscale group-hover:grayscale-0 scale-hover"
+                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                    />
                    <div className="insta-overlay">
                        <span className="font-bold">❤️ {post.likes}</span>

@@ -22,7 +22,11 @@ export const metadata: Metadata = {
   authors: [{ name: "Ouroplas Indústria" }],
   publisher: "Ouroplas",
   alternates: {
-    canonical: "https://ouroplas.com.br", // Link oficial
+    canonical: "/",
+  },
+  metadataBase: new URL("https://ouroplas.com.br"),
+  verification: {
+    google: "google-site-verification-code", // Placeholder
   },
   openGraph: {
     title: "Ouroplas | Soluções Completas em Injeção Plástica",
@@ -62,7 +66,40 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.jpg" sizes="any" />
       </head>
-      <body className={inter.variable}>{children}</body>
+      <body className={inter.variable}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "ManufacturingPlant",
+              "name": "Ouroplas Indústria e Comércio de Plásticos",
+              "url": "https://ouroplas.com.br",
+              "logo": "https://ouroplas.com.br/ouroplas-logo.jpg",
+              "description": "Especialistas em injeção de peças plásticas técnicas e desenvolvimento de moldes em Curitiba.",
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "Rua da Indústria, 100", // Needs actual address update if known
+                "addressLocality": "Curitiba",
+                "addressRegion": "PR",
+                "postalCode": "80000-000",
+                "addressCountry": "BR"
+              },
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+55-41-99820-2737",
+                "contactType": "sales",
+                "areaServed": "BR",
+                "availableLanguage": "Portuguese"
+              },
+              "sameAs": [
+                "https://www.instagram.com/ouroplas/"
+              ]
+            })
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

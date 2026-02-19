@@ -27,13 +27,22 @@ type Service = {
   order_index: number;
 };
 
+type News = {
+  id: string;
+  title: string;
+  content: string;
+  active: boolean;
+  created_at: string;
+};
+
 export default function AdminPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState("");
-  const [activeTab, setActiveTab] = useState<"leads" | "services" | "config">("leads");
+  const [activeTab, setActiveTab] = useState<"leads" | "services" | "config" | "news">("leads");
   const [leads, setLeads] = useState<Lead[]>([]);
   const [configs, setConfigs] = useState<SiteConfig[]>([]);
   const [services, setServices] = useState<Service[]>([]);
+  const [newsList, setNewsList] = useState<News[]>([]);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -60,6 +69,7 @@ export default function AdminPage() {
       fetchLeads();
       fetchConfigs();
       fetchServices();
+      fetchNews();
     }
   }, [isAuthenticated]);
 
@@ -91,6 +101,64 @@ export default function AdminPage() {
     
     if (data) setServices(data);
     if (error) console.error(error);
+  }
+
+  async function fetchNews() {
+    const { data, error } = await supabase
+      .from("news")
+      .select("*")
+      .order("created_at", { ascending: false });
+    
+    if (data) setNewsList(data);
+    if (error) console.error(error);
+  }
+
+  async function addNews() {
+    const title = prompt("Título da novidade:");
+    const content = prompt("Conteúdo da novidade:");
+    if (!title || !content) return;
+
+    setLoading(true);
+    const { error } = await supabase
+      .from("news")
+      .insert([{ title, content, active: true }]);
+    
+    setLoading(false);
+    if (!error) {
+      setMessage("Novidade adicionada!");
+      setTimeout(() => setMessage(""), 3000);
+      fetchNews();
+    }
+  }
+
+  async function toggleNewsStatus(id: string, currentStatus: boolean) {
+    setLoading(true);
+    const { error } = await supabase
+      .from("news")
+      .update({ active: !currentStatus })
+      .eq("id", id);
+    
+    setLoading(false);
+    if (!error) {
+      fetchNews();
+    }
+  }
+
+  async function deleteNews(id: string) {
+    if (!confirm("Tem certeza que deseja excluir esta novidade?")) return;
+    
+    setLoading(true);
+    const { error } = await supabase
+      .from("news")
+      .delete()
+      .eq("id", id);
+    
+    setLoading(false);
+    if (!error) {
+      setMessage("Novidade removida!");
+      setTimeout(() => setMessage(""), 3000);
+      fetchNews();
+    }
   }
 
   async function updateLeadStatus(id: string, status: string) {
@@ -230,6 +298,12 @@ export default function AdminPage() {
           >
             Configurações
           </button>
+          <button 
+            className={`tab-btn ${activeTab === 'news' ? 'active' : ''}`}
+            onClick={() => setActiveTab('news')}
+          >
+            Novidades
+          </button>
         </div>
 
         {message && (
@@ -321,6 +395,33 @@ export default function AdminPage() {
               </div>
               {configs.map((config) => (
                 <ConfigItem key={config.key} config={config} onSave={updateConfig} loading={loading} />
+              ))}
+            </div>
+          )}
+
+          {activeTab === 'news' && (
+            <div className="services-admin">
+              <div style={{ padding: '20px', borderBottom: '1px solid #eee' }}>
+                <button className="btn btn-primary" onClick={addNews}>+ Nova Novidade</button>
+              </div>
+              {newsList.map((item) => (
+                <div key={item.id} className="config-item" style={{ gridTemplateColumns: '1fr 2fr 100px 100px', alignItems: 'center' }}>
+                  <div>
+                    <h4 style={{ margin: 0, fontWeight: 'bold' }}>{item.title}</h4>
+                    <small>{new Date(item.created_at).toLocaleDateString('pt-BR')}</small>
+                  </div>
+                  <p style={{ margin: 0, fontSize: '0.9rem', color: '#64748b' }}>{item.content}</p>
+                  <label className="switch" style={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }}>
+                    <input 
+                      type="checkbox" 
+                      checked={item.active} 
+                      onChange={() => toggleNewsStatus(item.id, item.active)}
+                      style={{ marginRight: '8px' }}
+                    />
+                    <span style={{ fontSize: '0.8rem' }}>{item.active ? 'Ativo' : 'Inativo'}</span>
+                  </label>
+                  <button className="btn btn-outline" style={{ color: 'red', borderColor: 'red' }} onClick={() => deleteNews(item.id)}>Excluir</button>
+                </div>
               ))}
             </div>
           )}
