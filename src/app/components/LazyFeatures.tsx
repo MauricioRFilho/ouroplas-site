@@ -1,6 +1,8 @@
 "use client";
 
 import dynamic from 'next/dynamic';
+import { useState } from 'react';
+import ContactModal from './ContactModal';
 
 const InstagramFeed = dynamic(() => import('./InstagramFeed'), { 
   loading: () => <div className="h-96 bg-gray-50 animate-pulse" />,
@@ -14,6 +16,8 @@ type LazyFeaturesProps = {
 };
 
 export default function LazyFeatures({ config }: LazyFeaturesProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <>
       <section className="relative section py-0 overflow-hidden bg-primary">
@@ -32,7 +36,13 @@ export default function LazyFeatures({ config }: LazyFeaturesProps) {
       </section>
 
       <InstagramFeed username={config.instagram_username} url={config.instagram_url} />
-      <WhatsAppFloat />
+      <WhatsAppFloat onClick={() => setIsModalOpen(true)} />
+      
+      <ContactModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        whatsappNumber={config.whatsapp_number || ""}
+      />
     </>
   );
 }

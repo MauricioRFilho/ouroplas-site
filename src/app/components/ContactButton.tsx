@@ -20,7 +20,7 @@ export default function ContactButton({ label, className, whatsappNumber }: Cont
       <ContactModal 
         isOpen={isOpen} 
         onClose={() => setIsOpen(false)} 
-        whatsappNumber={whatsappNumber}
+        whatsappNumber={whatsappNumber || ""}
       />
     </>
   );
