@@ -44,3 +44,4 @@ assets_staging/
 # agents
 .agents
 .agent
+.env*.local
