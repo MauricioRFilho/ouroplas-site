@@ -86,9 +86,17 @@ export default function HomeClient({ config, newsSection }: HomeClientProps) {
               Suporte técnico especializado e garantia de entrega pronta para escalar seu projeto.
             </p>
             <div className="hero-buttons">
-              <button className="btn btn-primary btn-lg px-10" onClick={() => setIsModalOpen(true)}>Solicitar Orçamento</button>
+              <a 
+                href={`https://wa.me/${config.whatsapp_number || "5541998202737"}?text=Ol%C3%A1%2C%20gostaria%20de%20solicitar%20um%20or%C3%A7amento.`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary btn-lg px-10"
+              >
+                Solicitar Orçamento
+              </a>
               <a href="#sobre" className="btn btn-outline btn-lg px-10">Ver Nossa Fábrica</a>
             </div>
+
           </div>
         </div>
       </section>

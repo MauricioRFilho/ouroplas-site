@@ -41,20 +41,17 @@ export default function Navbar() {
             <a href="#contato" onClick={() => setIsMenuActive(false)}>Contato</a>
           </div>
 
-          <button 
+          <a 
+            href="https://wa.me/5541998202737?text=Ol%C3%A1%2C%20gostaria%20de%20atendimento%20t%C3%A9cnico."
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn btn-primary nav-cta"
-            onClick={() => setIsModalOpen(true)}
           >
             Atendimento Técnico
-          </button>
+          </a>
         </nav>
       </header>
-
-      <ContactModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-        whatsappNumber="5541998202737" // Default if config not loaded yet, or pass as prop if critical
-      />
     </>
   );
 }
+

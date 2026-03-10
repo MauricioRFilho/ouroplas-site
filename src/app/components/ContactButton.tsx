@@ -1,7 +1,5 @@
-"use client";
+import React from "react";
 
-import { useState } from "react";
-import ContactModal from "./ContactModal";
 
 type ContactButtonProps = {
   label: string;
@@ -10,18 +8,20 @@ type ContactButtonProps = {
 };
 
 export default function ContactButton({ label, className, whatsappNumber }: ContactButtonProps) {
-  const [isOpen, setIsOpen] = useState(false);
+  const number = whatsappNumber || "5541998202737";
+  const message = encodeURIComponent("Olá, gostaria de solicitar um orçamento.");
+  const whatsappUrl = `https://wa.me/${number}?text=${message}`;
 
   return (
-    <>
-      <button className={className} onClick={() => setIsOpen(true)}>
-        {label}
-      </button>
-      <ContactModal 
-        isOpen={isOpen} 
-        onClose={() => setIsOpen(false)} 
-        whatsappNumber={whatsappNumber || ""}
-      />
-    </>
+    <a 
+      href={whatsappUrl} 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className={className}
+      style={{ display: 'inline-block', textDecoration: 'none' }}
+    >
+      {label}
+    </a>
   );
 }
+
