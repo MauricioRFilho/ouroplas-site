@@ -11,7 +11,7 @@ const InstagramFeed = dynamic(() => import('./InstagramFeed'), {
   ssr: false 
 });
 
-const WhatsAppFloat = dynamic(() => import('./WhatsAppFloat'), { ssr: false });
+
 
 type HomeClientProps = {
   config: any;
@@ -278,17 +278,7 @@ export default function HomeClient({ config, newsSection }: HomeClientProps) {
         </div>
       </footer>
 
-      {/* Botão Flutuante Professional */}
-      <button 
-        className="whatsapp-float shadow-2xl"
-        onClick={() => setIsModalOpen(true)}
-        aria-label="Solicitar Orçamento"
-      >
-        <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
-          <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.025 3.207l-.694 2.547 2.628-.69c.906.571 1.638.924 2.809.925h.003c3.181 0 5.767-2.586 5.768-5.767 0-3.18-2.587-5.767-5.768-5.767l-.003-.001zm3.205 8.151c-.133.374-.752.713-1.034.758-.274.044-.549.074-1.579-.345-1.04-.423-1.709-1.474-1.758-1.543-.05-.069-.41-1.08-.41-1.08l.001-.001c0-.528.27-.8.361-.89l.274-.31c.091-.091.21-.141.31-.141h.231l.21.033.42 1.004c.05.12.079.249.01.389l-.21.42s-.167.185-.01.353c.158.168.618.665.918.963.3.298.549.336.758.204l.58-.5c.13-.11.26-.08.41-.03l1.104.532c.15.07.25.13.29.21.04.09.04.51-.09.886z"/>
-        </svg>
-        <span>Solicitar Orçamento</span>
-      </button>
+
 
       <ContactModal 
         isOpen={isModalOpen} 

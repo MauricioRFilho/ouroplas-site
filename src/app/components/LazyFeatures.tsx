@@ -10,7 +10,7 @@ const InstagramFeed = dynamic(() => import('./InstagramFeed'), {
   ssr: false 
 });
 
-const WhatsAppFloat = dynamic(() => import('./WhatsAppFloat'), { ssr: false });
+
 
 type LazyFeaturesProps = {
   config: any;
@@ -38,7 +38,7 @@ export default function LazyFeatures({ config }: LazyFeaturesProps) {
       </section>
 
       <InstagramFeed username={config.instagram_username} url={config.instagram_url} />
-      <WhatsAppFloat onClick={() => window.open(`https://wa.me/${config.whatsapp_number || "5541998202737"}?text=Ol%C3%A1%2C%20gostaria%20de%20solicitar%20um%20or%C3%A7amento.`, '_blank')} />
+
     </>
   );
 }

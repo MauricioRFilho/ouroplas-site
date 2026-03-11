@@ -594,34 +594,34 @@ p {
   margin: 0;
 }
 
-/* Floating Action Button - Ultra Premium */
+/* WhatsApp Bubble - Standard Green */
 .whatsapp-float {
   position: fixed;
   bottom: 40px;
   right: 40px;
-  background: var(--color-secondary);
-  color: var(--color-primary);
-  padding: 0 30px;
+  background: #25D366;
+  color: white;
+  width: 64px;
   height: 64px;
-  border-radius: 32px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
-  gap: 15px;
-  box-shadow: 0 15px 45px rgba(255, 179, 0, 0.4);
+  justify-content: center;
+  box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4);
   z-index: 9999;
-  font-weight: 900;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  font-size: 14px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: none;
   cursor: pointer;
   transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .whatsapp-float:hover {
-  transform: scale(1.05) translateY(-8px);
-  box-shadow: 0 25px 55px rgba(255, 179, 0, 0.5);
-  background: #ffffff;
+  transform: scale(1.1) translateY(-5px);
+  box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5);
+  background: #128C7E;
+}
+
+.whatsapp-float span {
+  display: none;
 }
 
 .whatsapp-float svg {
