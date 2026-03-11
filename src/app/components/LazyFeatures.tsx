@@ -3,6 +3,7 @@
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import ContactModal from './ContactModal';
+import LazyVideo from './LazyVideo';
 
 const InstagramFeed = dynamic(() => import('./InstagramFeed'), { 
   loading: () => <div className="h-96 bg-gray-50 animate-pulse" />,
@@ -22,9 +23,10 @@ export default function LazyFeatures({ config }: LazyFeaturesProps) {
     <>
       <section className="relative section py-0 overflow-hidden bg-primary">
         <div className="relative aspect-video tech-banner">
-          <video autoPlay muted loop playsInline className="img-cover gold-filter opacity-40" aria-hidden="true">
-            <source src="/hero-lite.mp4" type="video/mp4" />
-          </video>
+          <LazyVideo 
+            src="/hero-lite.mp4" 
+            className="img-cover gold-filter opacity-40" 
+          />
           <div className="absolute-fill flex-center text-center">
             <div className="container max-w-4xl px-6">
               <h2 className="text-white text-4xl sm:text-6xl font-bold mb-6">Alta Escala Industrial</h2>

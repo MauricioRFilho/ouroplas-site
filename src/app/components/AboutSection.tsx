@@ -1,4 +1,5 @@
 import Image from "next/image";
+import LazyVideo from "./LazyVideo";
 
 type AboutProps = {
   title: string;
@@ -31,16 +32,11 @@ export default function AboutSection({ title, text }: AboutProps) {
           </div>
           <div className="relative group overflow-hidden rounded-3xl shadow-2xl order-1 sm:order-2 h-full min-h-[400px]">
              {/* Optimized Video replacing GIF */}
-             <video 
-               autoPlay 
-               muted 
-               loop 
-               playsInline 
+             <LazyVideo 
+               src="/hero-lite.mp4" 
+               poster="/ouroplas-logo.jpg" 
                className="img-cover gold-filter object-cover w-full h-full"
-               poster="/ouroplas-logo.jpg"
-             >
-               <source src="/hero-lite.mp4" type="video/mp4" />
-             </video>
+             />
              
              <div className="absolute-fill flex-center opacity-0 group-hover:opacity-100 transition-all" style={{ background: 'rgba(5, 10, 48, 0.4)' }}>
                 <span className="text-white font-bold tracking-widest uppercase text-sm">Produção Real</span>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import LazyVideo from "./LazyVideo";
 import ContactButton from "./ContactButton"; // We'll create a small client component for the button
 
 type HeroProps = {
@@ -8,17 +9,11 @@ type HeroProps = {
 export default function Hero({ title }: HeroProps) {
   return (
     <section id="home" className="hero">
-      <video 
-        autoPlay 
-        muted 
-        loop 
-        playsInline 
+      <LazyVideo 
+        src="/hero-lite.mp4" 
+        poster="/ouroplas-logo.jpg" 
         className="hero-video gold-filter" 
-        aria-hidden="true"
-        poster="/ouroplas-logo.jpg" // Fallback poster
-      >
-        <source src="/hero-lite.mp4" type="video/mp4" />
-      </video>
+      />
       <div className="video-overlay"></div>
       <div className="container">
         <div className="hero-content text-left">
