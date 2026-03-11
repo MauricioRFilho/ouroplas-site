@@ -3,7 +3,7 @@ export const siteConfig = {
   about_title: "Qualidade de Ponta a Ponta",
   about_text: "A Ouroplas atua na prestação de serviços de injeção de peças plásticas, atendendo às necessidades atuais e futuras de indústrias que buscam qualidade, confiabilidade e eficiência produtiva. Contamos com máquinas de diferentes portes, atendendo diversos setores.",
   whatsapp_number: "5541998202737",
-  contact_email: "wcdopradoinjecao@gmail.com",
+  contact_email: "contato@ouroplas.com.br",
   instagram_username: "ouroplas",
   instagram_url: "https://www.instagram.com/ouroplas/",
 };
