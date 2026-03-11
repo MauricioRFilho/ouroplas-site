@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import { supabase } from "@/lib/supabaseClient";
 
 interface ContactModalProps {
   isOpen: boolean;
@@ -34,24 +33,7 @@ export default function ContactModal({ isOpen, onClose, whatsappNumber }: Contac
     setLoading(true);
 
     try {
-        // 1. Save to Supabase
-        const { error } = await supabase
-            .from('leads')
-            .insert([
-                { 
-                    name: formData.name, 
-                    company: formData.company, 
-                    phone: formData.phone,
-                    message: formData.message,
-                    status: 'NOVO'
-                }
-            ]);
-
-        if (error) {
-            console.error('Error saving lead:', error);
-        }
-
-        // 2. Redirect to WhatsApp
+        // Redirect to WhatsApp
         const text = `Olá, me chamo ${formData.name} da empresa ${formData.company}. ${formData.message}`;
         const encodedText = encodeURIComponent(text);
         
@@ -60,7 +42,7 @@ export default function ContactModal({ isOpen, onClose, whatsappNumber }: Contac
         
         window.open(whatsappLink, '_blank', 'noopener,noreferrer');
         
-        // 3. Clear and close
+        // Clear and close
         setFormData({ name: "", company: "", phone: "", message: "" });
         onClose();
 

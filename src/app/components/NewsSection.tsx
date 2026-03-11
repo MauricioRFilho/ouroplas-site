@@ -1,25 +1,7 @@
-import { supabase } from "@/lib/supabaseClient";
+import { newsData } from "@/data/site-data";
 
-type NewsItem = {
-  id: string;
-  title: string;
-  content: string;
-  created_at: string;
-};
-
-export default async function NewsSection() {
-  const { data: news, error } = await supabase
-    .from("news")
-    .select("*")
-    .eq("active", true)
-    .order("created_at", { ascending: false });
-
-  if (error) {
-    console.error("Error fetching news:", error);
-    return null;
-  }
-
-  if (!news || news.length === 0) {
+export default function NewsSection() {
+  if (!newsData || newsData.length === 0) {
     return null;
   }
 
@@ -32,7 +14,7 @@ export default async function NewsSection() {
         </div>
         
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {news.map((item) => (
+          {newsData.map((item) => (
             <div key={item.id} className="bg-white p-6 rounded-lg shadow-sm border-l-4 border-[var(--color-secondary)] hover:shadow-md transition-shadow">
               <span className="text-xs text-gray-500 mb-2 block">
                 {new Date(item.created_at).toLocaleDateString("pt-BR")}
