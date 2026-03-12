@@ -12,12 +12,21 @@ const InstagramFeed = dynamic(() => import('./InstagramFeed'), {
 
 
 
+interface SiteConfig {
+  hero_title: string;
+  about_title: string;
+  about_text: string;
+  whatsapp_number: string;
+  contact_email: string;
+  instagram_username: string;
+  instagram_url: string;
+}
+
 type LazyFeaturesProps = {
-  config: any;
+  config: SiteConfig;
 };
 
 export default function LazyFeatures({ config }: LazyFeaturesProps) {
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>

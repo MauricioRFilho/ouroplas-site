@@ -13,8 +13,18 @@ const InstagramFeed = dynamic(() => import('./InstagramFeed'), {
 
 
 
+interface SiteConfig {
+  hero_title: string;
+  about_title: string;
+  about_text: string;
+  whatsapp_number: string;
+  contact_email: string;
+  instagram_username: string;
+  instagram_url: string;
+}
+
 type HomeClientProps = {
-  config: any;
+  config: SiteConfig;
   newsSection: React.ReactNode;
 };
 

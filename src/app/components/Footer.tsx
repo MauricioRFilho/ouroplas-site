@@ -1,7 +1,17 @@
 import Image from "next/image";
 
+interface SiteConfig {
+  hero_title: string;
+  about_title: string;
+  about_text: string;
+  whatsapp_number: string;
+  contact_email: string;
+  instagram_username: string;
+  instagram_url: string;
+}
+
 type FooterProps = {
-  config: any;
+  config: SiteConfig;
 };
 
 export default function Footer({ config }: FooterProps) {

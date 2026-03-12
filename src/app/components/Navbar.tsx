@@ -6,7 +6,6 @@ import ContactModal from "./ContactModal";
 
 export default function Navbar() {
   const [isMenuActive, setIsMenuActive] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>

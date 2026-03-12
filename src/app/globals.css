@@ -403,7 +403,11 @@ p {
 }
 
 @media (max-width: 480px) {
-  .section { padding: 60px 0; }
+  .section { padding: 40px 0; }
+  .section-header { margin-bottom: 2.5rem; }
+  .glass-card { padding: 1.5rem; }
+  .grid { gap: 1.5rem; }
+  .aspect-video { aspect-ratio: 4 / 3; }
   .hero-buttons .btn { width: 100%; }
   .hero-video { opacity: 0.4; } /* Lighter video for text contrast on small screens */
   .nav-container { height: 70px; }
