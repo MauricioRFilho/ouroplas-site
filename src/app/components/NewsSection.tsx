@@ -6,21 +6,21 @@ export default function NewsSection() {
   }
 
   return (
-    <section className="py-12 bg-gray-50 border-b border-gray-200">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="h-8 w-1 bg-[var(--color-primary)]"></div>
-          <h2 className="text-2xl font-bold text-[var(--color-primary)]">Novidades Ouroplas</h2>
+    <section className="section bg-gray-soft" style={{ borderBottom: '1px solid rgba(0,0,0,0.05)' }}>
+      <div className="container">
+        <div className="section-header" style={{ marginBottom: '3rem', display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          <div style={{ height: '2rem', width: '4px', backgroundColor: 'var(--color-secondary)', borderRadius: '2px' }}></div>
+          <h2 style={{ margin: 0 }}>Novidades Ouroplas</h2>
         </div>
         
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-3">
           {newsData.map((item) => (
-            <div key={item.id} className="bg-white p-6 rounded-lg shadow-sm border-l-4 border-[var(--color-secondary)] hover:shadow-md transition-shadow">
-              <span className="text-xs text-gray-500 mb-2 block">
+            <div key={item.id} className="card" style={{ padding: '2rem', display: 'flex', flexDirection: 'column' }}>
+              <span className="text-sm" style={{ color: 'var(--color-secondary)', fontWeight: 600, marginBottom: '0.5rem', display: 'block' }}>
                 {new Date(item.created_at).toLocaleDateString("pt-BR")}
               </span>
-              <h3 className="text-xl font-bold mb-3 text-gray-800">{item.title}</h3>
-              <p className="text-gray-600 leading-relaxed whitespace-pre-wrap">
+              <h3 className="mb-4" style={{ fontSize: '1.25rem' }}>{item.title}</h3>
+              <p className="leading-relaxed" style={{ fontSize: '0.95rem' }}>
                 {item.content}
               </p>
             </div>
