@@ -31,10 +31,31 @@ export default function AdminPage() {
   const [status, setStatus] = useState<{ type: 'success' | 'error' | 'loading' | null, msg: string }>({ type: null, msg: "" });
   const [activeTab, setActiveTab] = useState<'config' | 'news'>('config');
 
-  const handleLogin = (e: React.FormEvent) => {
+  const [loginError, setLoginError] = useState("");
+  const [isLoggingIn, setIsLoggingIn] = useState(false);
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password) {
-      setIsLoggedIn(true);
+    setLoginError("");
+    setIsLoggingIn(true);
+    
+    try {
+      const res = await fetch("/api/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ password }),
+      });
+
+      if (res.ok) {
+        setIsLoggedIn(true);
+      } else {
+        const data = await res.json();
+        setLoginError(data.error || "Senha incorreta");
+      }
+    } catch (err) {
+      setLoginError("Erro na conexão");
+    } finally {
+      setIsLoggingIn(false);
     }
   };
 
@@ -108,9 +129,15 @@ export default function AdminPage() {
               </div>
             </div>
             
-            <button type="submit" className="btn-login">
-              Entrar no Painel
-              <ChevronRight size={20} />
+            {loginError && (
+              <div style={{ color: '#ff4d4d', fontSize: '12px', fontWeight: 'bold', textAlign: 'center', marginBottom: '16px' }}>
+                {loginError}
+              </div>
+            )}
+            
+            <button type="submit" className="btn-login" disabled={isLoggingIn}>
+              {isLoggingIn ? <Loader2 className="animate-spin" size={20} /> : "Entrar no Painel"}
+              {!isLoggingIn && <ChevronRight size={20} />}
             </button>
           </form>
 
