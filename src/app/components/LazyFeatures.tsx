@@ -2,7 +2,6 @@
 
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
-import ContactModal from './ContactModal';
 import LazyVideo from './LazyVideo';
 
 const InstagramFeed = dynamic(() => import('./InstagramFeed'), { 

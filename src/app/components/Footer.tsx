@@ -16,7 +16,7 @@ type FooterProps = {
 
 export default function Footer({ config }: FooterProps) {
   return (
-    <footer className="footer bg-dark-accent text-white">
+    <footer id="contato" className="footer bg-dark-accent text-white">
       <div className="container">
         <div className="footer-main">
           <div className="footer-col">

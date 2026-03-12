@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import dynamic from 'next/dynamic';
-import ContactModal from "./ContactModal";
 
 // Lazy load non-critical components to fix TBT
 const InstagramFeed = dynamic(() => import('./InstagramFeed'), { 
@@ -288,13 +287,6 @@ export default function HomeClient({ config, newsSection }: HomeClientProps) {
         </div>
       </footer>
 
-
-
-      <ContactModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-        contactEmail={config.contact_email}
-      />
     </main>
   );
 }

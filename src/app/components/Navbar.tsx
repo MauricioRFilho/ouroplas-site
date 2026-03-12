@@ -2,12 +2,10 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import ContactModal from "./ContactModal";
 import { siteConfig } from "@/data/site-data";
 
 export default function Navbar() {
   const [isMenuActive, setIsMenuActive] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <>
@@ -39,11 +37,7 @@ export default function Navbar() {
             <a href="#home" onClick={() => setIsMenuActive(false)}>Início</a>
             <a href="#sobre" onClick={() => setIsMenuActive(false)}>Fábrica</a>
             <a href="#especialista" onClick={() => setIsMenuActive(false)}>Tecnologia</a>
-            <a href="#contato" onClick={(e) => {
-              e.preventDefault();
-              setIsMenuActive(false);
-              setIsModalOpen(true);
-            }}>Contato</a>
+            <a href="#contato" onClick={() => setIsMenuActive(false)}>Contato</a>
           </div>
 
           <a 
@@ -56,12 +50,6 @@ export default function Navbar() {
           </a>
         </nav>
       </header>
-
-      <ContactModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-        contactEmail={siteConfig.contact_email}
-      />
     </>
   );
 }
