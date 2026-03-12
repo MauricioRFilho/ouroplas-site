@@ -9,8 +9,11 @@ Este é o repositório oficial do novo site institucional da **Ouroplas Indústr
 *   **Frontend**: [Next.js 15](https://nextjs.org/) (App Router, React Server Components)
 *   **Linguagem**: TypeScript / React
 *   **Estilização**: CSS Moderno (Vanilla + Modules) com Design System próprio (Navy Blue & Gold)
-*   **Banco de Dados**: [Supabase](https://supabase.com/) (PostgreSQL) para gestão de Leads e CMS Headless
-*   **Infraestrutura**: Docker & Docker Compose
+*   **Frontend**: [Next.js 15](https://nextjs.org/) (App Router, React Server Components)
+*   **Linguagem**: TypeScript / React
+*   **Estilização**: CSS Moderno (Vanilla + Modules) com Design System próprio (Navy Blue & Gold)
+*   **CMS (Gestão de Dados)**: Git-CMS via JSON (`src/data/content.json`) e GitHub API
+*   **Infraestrutura**: Vercel
 *   **Mídia**: Suporte a Vídeo Background e Otimização de Imagens
 
 ## ✨ Funcionalidades Principais
@@ -18,7 +21,7 @@ Este é o repositório oficial do novo site institucional da **Ouroplas Indústr
 1.  **Captura Inteligente de Leads**:
     *   Botão flutuante do WhatsApp e CTAs estratégicos.
     *   **Modal de Pré-qualificação**: Intercepta o clique para capturar Nome/Empresa/Telefone antes de redirecionar para o WhatsApp.
-    *   Salva o lead automaticamente no banco de dados (Supabase) para CRM futuro.
+    *   Redirecionamento dinâmico baseado nos contatos configurados.
     
 2.  **Design Premium Industrial**:
     *   Identidade visual alinhada com a marca (Azul Marinho e Dourado).
@@ -43,11 +46,11 @@ Este é o repositório oficial do novo site institucional da **Ouroplas Indústr
     cd ouroplas-site
     ```
 
-2.  **Configure as Variáveis de Ambiente**:
-    Crie um arquivo `.env.local` na raiz com suas chaves do Supabase:
+    Crie um arquivo `.env.local` na raiz com as chaves para o Git-CMS:
     ```env
-    NEXT_PUBLIC_SUPABASE_URL=SuaUrlSupabase
-    NEXT_PUBLIC_SUPABASE_ANON_KEY=SuaChaveAnonima
+    ADMIN_PASSWORD=sua_senha
+    GITHUB_TOKEN=ghp_seu_token
+    GITHUB_REPO=MauricioRFilho/ouroplas-site
     ```
 
 3.  **Instale as dependências**:
@@ -70,20 +73,21 @@ docker-compose up --build
 ```
 O site estará disponível em `http://localhost:3000`.
 
-## 🗄️ Estrutura do Banco de Dados (Supabase)
+## 🗄️ Painel Administrativo
 
-O projeto utiliza um arquivo de migração em `supabase/migrations/0001_initial_schema.sql`.
+O site possui um painel simples para edição de conteúdos em `/admin`. As alterações são salvas diretamente no repositório via API do GitHub, garantindo persistência sem custos de banco de dados.
 
-### Tabelas:
-*   `leads`: Armazena os contatos capturados pelo site.
-*   `site_config`: Tabela Key-Value para permitir edição de textos (telefone, título) sem mexer no código (CMS).
+### Configuração necessária (Vercel):
+- `ADMIN_PASSWORD`: Senha de acesso ao painel.
+- `GITHUB_TOKEN`: Fine-grained personal access token com permissão de escrita no repositório.
+- `GITHUB_REPO`: `usuario/nome-do-repo`.
 
 ## 📁 Estrutura de Pastas
 
 *   `src/app`: Páginas e Layouts (Next.js App Router).
 *   `src/components`: Componentes Reutilizáveis (Modal, Botão WhatsApp, Feed).
 *   `public`: Arquivos estáticos (Imagens, Vídeos, Logos).
-*   `supabase`: Migrations e scripts SQL.
+*   `src/data`: Arquivos de dados JSON e configurações do site.
 
 ---
 

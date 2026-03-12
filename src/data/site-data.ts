@@ -1,24 +1,4 @@
-export const siteConfig = {
-  hero_title: "Injeção Plástica com <span class='text-secondary'>Precisão</span> Industrial",
-  about_title: "Qualidade de Ponta a Ponta",
-  about_text: "A Ouroplas atua na prestação de serviços de injeção de peças plásticas, atendendo às necessidades atuais e futuras de indústrias que buscam qualidade, confiabilidade e eficiência produtiva. Contamos com máquinas de diferentes portes, atendendo diversos setores.",
-  whatsapp_number: "5541998202737",
-  contact_email: "contato@ouroplas.com.br",
-  instagram_username: "ouroplas",
-  instagram_url: "https://www.instagram.com/ouroplas/",
-};
+import content from "./content.json";
 
-export const newsData = [
-  {
-    id: "1",
-    title: "Expansão de Capacidade Produtiva",
-    content: "Adquirimos novas injetoras de última geração para aumentar nossa capacidade e precisão na produção de peças técnicas.",
-    created_at: new Date().toISOString(),
-  },
-  {
-    id: "2",
-    title: "Foco em Sustentabilidade",
-    content: "Implementamos novos processos para reciclagem interna de resíduos plásticos, reforçando nosso compromisso com o meio ambiente.",
-    created_at: new Date().toISOString(),
-  },
-];
+export const siteConfig = content.siteConfig;
+export const newsData = content.newsData;
