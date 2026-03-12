@@ -293,7 +293,7 @@ export default function HomeClient({ config, newsSection }: HomeClientProps) {
       <ContactModal 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 
-        whatsappNumber={config.whatsapp_number}
+        contactEmail={config.contact_email}
       />
     </main>
   );

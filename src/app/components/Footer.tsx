@@ -39,15 +39,25 @@ export default function Footer({ config }: FooterProps) {
           <div className="footer-col">
             <h4 className="text-secondary uppercase tracking-[0.2em] text-xs font-bold mb-2">Engenharia | Fábrica</h4>
             <p className="text-white/60 text-sm mb-4">Unidade Industrial Estratégica</p>
-            <p className="font-bold text-lg text-white">{config.contact_email}</p>
+            <a href={`mailto:${config.contact_email}`} className="font-bold text-lg text-white hover:text-secondary transition-colors block mb-1">
+              {config.contact_email}
+            </a>
             <p className="text-white/30 text-xs italic">Atendimento Técnico Comercial</p>
           </div>
 
           <div className="footer-col sm:items-end sm:text-right">
             <h4 className="text-secondary uppercase tracking-[0.2em] text-xs font-bold mb-2">Atendimento Direto</h4>
-            <p className="text-3xl sm:text-4xl font-black text-white mb-4">
-              {config.whatsapp_number ? `+55 ${config.whatsapp_number.slice(0,2)} ${config.whatsapp_number.slice(2)}` : '+55 (41) 99820-2737'}
-            </p>
+            <div className="text-3xl sm:text-4xl font-black text-white mb-4">
+              {config.whatsapp_number ? (
+                <a href={`https://wa.me/${config.whatsapp_number}`} target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">
+                  +55 ({config.whatsapp_number.slice(2,4)}) {config.whatsapp_number.slice(4,9)}-{config.whatsapp_number.slice(9)}
+                </a>
+              ) : (
+                <a href="https://wa.me/5541998202737" target="_blank" rel="noopener noreferrer" className="hover:text-secondary transition-colors">
+                  +55 (41) 99820-2737
+                </a>
+              )}
+            </div>
             <div className="bg-white/5 py-2 px-4 rounded-full inline-block">
               <p className="text-white/40 text-xs uppercase tracking-widest font-bold">Segunda a Sexta • 08h às 18h</p>
             </div>

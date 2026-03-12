@@ -4,10 +4,10 @@ import { useState, useEffect } from "react";
 interface ContactModalProps {
   isOpen: boolean;
   onClose: () => void;
-  whatsappNumber: string;
+  contactEmail: string;
 }
 
-export default function ContactModal({ isOpen, onClose, whatsappNumber }: ContactModalProps) {
+export default function ContactModal({ isOpen, onClose, contactEmail }: ContactModalProps) {
   const [formData, setFormData] = useState({
     name: "",
     company: "",
@@ -33,14 +33,12 @@ export default function ContactModal({ isOpen, onClose, whatsappNumber }: Contac
     setLoading(true);
 
     try {
-        // Redirect to WhatsApp
-        const text = `Olá, me chamo ${formData.name} da empresa ${formData.company}. ${formData.message}`;
-        const encodedText = encodeURIComponent(text);
+        const subject = `Contato Site - ${formData.company || formData.name}`;
+        const body = `Nome: ${formData.name}\nEmpresa: ${formData.company}\nTelefone/WhatsApp: ${formData.phone}\n\n${formData.message}`;
         
-        const cleanNumber = whatsappNumber.replace(/\D/g, '');
-        const whatsappLink = `https://wa.me/${cleanNumber}?text=${encodedText}`;
+        const mailtoLink = `mailto:${contactEmail || 'contato@ouroplas.com.br'}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         
-        window.open(whatsappLink, '_blank', 'noopener,noreferrer');
+        window.location.href = mailtoLink;
         
         // Clear and close
         setFormData({ name: "", company: "", phone: "", message: "" });
@@ -48,7 +46,7 @@ export default function ContactModal({ isOpen, onClose, whatsappNumber }: Contac
 
     } catch (err) {
         console.error("Unexpected error:", err);
-        alert("Ocorreu um erro ao processar seu contato. Por favor, tente novamente.");
+        alert("Ocorreu um erro ao preparar o seu e-mail. Por favor, tente novamente.");
     } finally {
         setLoading(false);
     }
@@ -74,8 +72,8 @@ export default function ContactModal({ isOpen, onClose, whatsappNumber }: Contac
         </button>
         
         <div className="modal-header">
-          <h3 id="modal-title">Atendimento Técnico</h3>
-          <p>Fale diretamente com nossa engenharia para orçamentos de moldes e injeção.</p>
+          <h3 id="modal-title">Fale Conosco</h3>
+          <p>Dúvidas, suporte ou novos projetos? Envie-nos um e-mail detalhado e retornaremos brevemente.</p>
         </div>
 
         <form onSubmit={handleSubmit} className="contact-form">
@@ -87,28 +85,28 @@ export default function ContactModal({ isOpen, onClose, whatsappNumber }: Contac
               name="name"
               autoComplete="name"
               required
-              placeholder="Ex: Responsável Técnico / Compras"
+              placeholder="Seu Nome Apelido"
               value={formData.name}
               onChange={(e) => setFormData({...formData, name: e.target.value})}
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="company">Indústria / Empresa <span className="text-secondary">*</span></label>
+            <label htmlFor="company">Empresa <span className="text-secondary">*</span></label>
             <input
               type="text"
               id="company"
               name="organization"
               autoComplete="organization"
               required
-              placeholder="Sua Indústria"
+              placeholder="Onde você trabalha"
               value={formData.company}
               onChange={(e) => setFormData({...formData, company: e.target.value})}
             />
           </div>
 
           <div className="form-group">
-            <label htmlFor="phone">WhatsApp <span className="text-secondary">*</span></label>
+            <label htmlFor="phone">Seu Contato <span className="text-secondary">*</span></label>
             <input
               type="tel"
               id="phone"
@@ -122,23 +120,23 @@ export default function ContactModal({ isOpen, onClose, whatsappNumber }: Contac
           </div>
 
           <div className="form-group">
-            <label htmlFor="message">Assunto / Necessidade</label>
+            <label htmlFor="message">Sua Mensagem</label>
             <textarea
               id="message"
               name="message"
               rows={3}
-              placeholder="Breve descrição do seu projeto ou peça..."
+              placeholder="Como podemos te ajudar?"
               value={formData.message}
               onChange={(e) => setFormData({...formData, message: e.target.value})}
             />
           </div>
 
           <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
-            {loading ? "Processando..." : "SOLICITAR ATENDIMENTO"}
+            {loading ? "Processando..." : "ENVIAR E-MAIL"}
           </button>
           
           <p className="text-center mt-4" style={{ fontSize: '0.75rem', opacity: 0.6 }}>
-            Seus dados estão protegidos conforme nossa LGPD.
+            Abrirá automaticamente o seu gerenciador de e-mail (Outlook/Gmail).
           </p>
         </form>
       </div>
