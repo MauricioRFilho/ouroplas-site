@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react";
+import Script from "next/script";
 import WhatsAppBubble from "./components/WhatsAppBubble";
 import "./globals.css";
 
@@ -95,6 +96,19 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="/favicon.png" type="image/png" />
       </head>
+      {/* Google Ads Tag - AW-17891738051 */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=AW-17891738051"
+        strategy="afterInteractive"
+      />
+      <Script id="google-ads-tag" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'AW-17891738051');
+        `}
+      </Script>
       <body className={inter.variable}>
         <script
           type="application/ld+json"

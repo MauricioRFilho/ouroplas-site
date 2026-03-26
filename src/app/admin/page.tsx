@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { 
   Lock, 
@@ -21,6 +21,7 @@ import {
   Loader2,
   ArrowLeft
 } from "lucide-react";
+import Link from "next/link";
 import contentData from "../../data/content.json";
 import "./admin.css";
 
@@ -141,9 +142,9 @@ export default function AdminPage() {
             </button>
           </form>
 
-          <a href="/" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginTop: '32px', color: 'rgba(255,255,255,0.3)', textDecoration: 'none', fontSize: '14px', fontWeight: '700' }}>
+          <Link href="/" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', marginTop: '32px', color: 'rgba(255,255,255,0.3)', textDecoration: 'none', fontSize: '14px', fontWeight: '700' }}>
             <ArrowLeft size={16} /> Voltar para o Site
-          </a>
+          </Link>
         </motion.div>
       </div>
     );
@@ -256,7 +257,7 @@ export default function AdminPage() {
                       value={content.siteConfig.hero_title}
                       onChange={(e) => setContent({...content, siteConfig: {...content.siteConfig, hero_title: e.target.value}})}
                     />
-                    <p style={{ color: '#94a3b8', fontSize: '11px', marginTop: '8px', fontWeight: '600' }}>Dica: Use span com class 'text-secondary' para destacar textos em dourado.</p>
+                    <p style={{ color: '#94a3b8', fontSize: '11px', marginTop: '8px', fontWeight: '600' }}>Dica: Use span com class &apos;text-secondary&apos; para destacar textos em dourado.</p>
                   </div>
                 </div>
 
