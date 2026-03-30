@@ -41,7 +41,7 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL("https://www.ouroplas.com.br"),
   verification: {
-    google: "google-site-verification-code", // O usuário deve inserir o código real do Console futuramente
+    google: "9gOhOiHZC63WrAhBiM7rnwA4vx-DTO9hNHPdzrDlsjY",
   },
   openGraph: {
     title: "Ouroplas | Injeção Plástica e Moldagem Industrial de Precisão",
@@ -123,16 +123,16 @@ export default function RootLayout({
               "description": "Especialistas em injeção de termoplásticos técnicos e desenvolvimento de moldes. Capacidadade industrial com injetoras de 80 a 300 toneladas.",
               "address": {
                 "@type": "PostalAddress",
-                "streetAddress": "Curitiba, Paraná",
-                "addressLocality": "Curitiba",
+                "streetAddress": "R. Cezinando Dias Paredes, 970",
+                "addressLocality": "Boqueirão, Curitiba",
                 "addressRegion": "PR",
-                "postalCode": "80000-000",
+                "postalCode": "81730-090",
                 "addressCountry": "BR"
               },
               "geo": {
                 "@type": "GeoCoordinates",
-                "latitude": -25.4284,
-                "longitude": -49.2733
+                "latitude": -25.50607,
+                "longitude": -49.22250
               },
               "contactPoint": {
                 "@type": "ContactPoint",
